@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://b82bljy3dhpax"]
+
+[ext_resource type="Texture2D" uid="uid://c6chl0altikll" path="res://content/environment/cauldron_spritesheet.png" id="1_wl4jt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prv7k"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm3vy"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u25ou"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v1jf"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3vtx"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byuvd"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4j22"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqlm8"]
+atlas = ExtResource("1_wl4jt")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ifisb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prv7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm3vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u25ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v1jf")
+}],
+"loop": 1,
+"name": &"kuali_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3vtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byuvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4j22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqlm8")
+}],
+"loop": 1,
+"name": &"kuali_proses",
+"speed": 5.0
+}]
+
+[node name="Kuali" type="Area2D" unique_id=718830078]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706974935]
+sprite_frames = SubResource("SpriteFrames_ifisb")
+animation = &"kuali_proses"
+frame_progress = 0.4164723

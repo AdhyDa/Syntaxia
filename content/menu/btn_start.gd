@@ -30,4 +30,4 @@ func _on_play_pressed() -> void:
 	await tween.finished
 	
 	# 4. Setelah layar hitam sepenuhnya, pindah scene
-	get_tree().change_scene_to_file(main_scene_path)
+	get_tree().change_scene_to_file("res://main.tscn")
