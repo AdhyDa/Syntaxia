@@ -1,6 +1,170 @@
 [gd_scene format=3 uid="uid://by5fjij7yiyla"]
 
-[node name="TitleScreen" type="Control"]
+[ext_resource type="Texture2D" uid="uid://dp8tp5wtyhfjb" path="res://content/menu/aset_menu/bg_menu.jpg" id="1_6rr7n"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="1_pmwsi"]
+[ext_resource type="Script" uid="uid://y5xhtr8nb2e" path="res://content/menu/btn_start.gd" id="3_gxb8f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_imht2"]
+font = ExtResource("1_pmwsi")
+font_size = 120
+font_color = Color(0, 0.8980392, 1, 1)
+outline_size = 10
+outline_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rr7n"]
+font = ExtResource("1_pmwsi")
+font_size = 28
+font_color = Color(1, 0, 0.47843137, 1)
+outline_size = 3
+outline_color = Color(0.16078432, 0.16078432, 0.003921569, 1)
+
+[sub_resource type="Animation" id="Animation_6rr7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(33, 102)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 216)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D2:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.09]
+}
+
+[sub_resource type="Animation" id="Animation_gxb8f"]
+resource_name = "floating"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.01, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(33, 102), Vector2(33, 105), Vector2(33, 102)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.01, 1.54, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(80, 216), Vector2(80, 220), Vector2(80, 216.64), Vector2(80, 220.297), Vector2(80, 216)]
+}
+
+[sub_resource type="Animation" id="Animation_rf788"]
+resource_name = "light_cyan"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D2:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.09, 2.17, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_joqfy"]
+resource_name = "ligth_magenta"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 3.46, 1.09]
+}
+
+[sub_resource type="Animation" id="Animation_58rk5"]
+resource_name = "pulse_light_magenta"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf788"]
+_data = {
+&"RESET": SubResource("Animation_6rr7n"),
+&"floating": SubResource("Animation_gxb8f"),
+&"light_cyan": SubResource("Animation_rf788"),
+&"ligth_magenta": SubResource("Animation_joqfy"),
+&"pulse_light_magenta": SubResource("Animation_58rk5")
+}
+
+[sub_resource type="Gradient" id="Gradient_u8oox"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ifisb"]
+gradient = SubResource("Gradient_u8oox")
+fill_to = Vector2(0.5, 0.5)
+
+[node name="TitleScreen" type="Control" unique_id=514390234]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -8,24 +172,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="BackgroundMenu" type="TextureRect" parent="." unique_id=1287870639]
+layout_mode = 0
+offset_right = 2752.0
+offset_bottom = 1536.0
+scale = Vector2(0.46823734, 0.46823734)
+texture = ExtResource("1_6rr7n")
+
+[node name="Label" type="Label" parent="." unique_id=642806663]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -63.5
-offset_top = -11.5
-offset_right = 63.5
-offset_bottom = 11.5
+offset_left = -607.0
+offset_top = -258.0
+offset_right = -179.0
+offset_bottom = -147.9986
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
-text = "Ninja Adventure"
+text = "Syntaxia"
+label_settings = SubResource("LabelSettings_imht2")
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." unique_id=1639216313]
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 8
@@ -33,11 +205,85 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -63.5
-offset_top = 90.0
-offset_right = 63.5
-offset_bottom = 113.0
+offset_left = -560.0
+offset_top = -144.0
+offset_right = -275.0
+offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Press Start"
+text = "Make Potion with Code!"
+label_settings = SubResource("LabelSettings_6rr7n")
 horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=641893419]
+libraries/ = SubResource("AnimationLibrary_rf788")
+autoplay = &"floating"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=384109141]
+modulate = Color(0.2, 1, 1, 1)
+position = Vector2(902, 420)
+amount = 15
+gravity = Vector2(0, -980)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=746719132]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 531.0
+offset_right = 146.0
+offset_bottom = 669.0
+theme_override_constants/separation = 8
+
+[node name="BtnStart" type="Button" parent="VBoxContainer" unique_id=717719374 node_paths=PackedStringArray("transition_overlay")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.41568628, 1, 0.6392157, 1)
+theme_override_colors/font_hover_color = Color(0.31764707, 0.9490196, 0.09803922, 1)
+theme_override_fonts/font = ExtResource("1_pmwsi")
+theme_override_font_sizes/font_size = 40
+text = "PLAY"
+script = ExtResource("3_gxb8f")
+main_scene_path = "uid://braligc24g3qm"
+transition_overlay = NodePath("../../TransitionOverlay")
+
+[node name="BtnAbout" type="Button" parent="VBoxContainer" unique_id=666061698]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.41568628, 1, 0.6392157, 1)
+theme_override_colors/font_hover_color = Color(0.31764707, 0.9490196, 0.09803922, 1)
+theme_override_fonts/font = ExtResource("1_pmwsi")
+theme_override_font_sizes/font_size = 40
+text = "ABOUT"
+
+[node name="BtnExit" type="Button" parent="VBoxContainer" unique_id=143532174]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0, 0.47843137, 1)
+theme_override_colors/font_hover_color = Color(1, 0.53113896, 0.65515554, 1)
+theme_override_fonts/font = ExtResource("1_pmwsi")
+theme_override_font_sizes/font_size = 40
+text = "EXIT"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1976962332]
+position = Vector2(908.00006, 71.00001)
+scale = Vector2(0.5270071, 1.7341572)
+color = Color(1, 0, 0.47843137, 1)
+texture = SubResource("GradientTexture2D_ifisb")
+texture_scale = 6.48
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1960313705]
+position = Vector2(941.00006, 67.00001)
+scale = Vector2(0.5270071, 1.7341572)
+color = Color(0, 0.8980392, 1, 1)
+energy = 1.09
+texture = SubResource("GradientTexture2D_ifisb")
+texture_scale = 6.48
+
+[node name="TransitionOverlay" type="ColorRect" parent="." unique_id=1281198266]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.011764706, 0.011764706, 0.011764706, 0)
