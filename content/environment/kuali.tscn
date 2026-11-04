@@ -51,7 +51,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"kuali_idle",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -68,7 +68,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"kuali_proses",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="Kuali" type="Area2D" unique_id=718830078]
@@ -76,4 +76,4 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706974935]
 sprite_frames = SubResource("SpriteFrames_ifisb")
 animation = &"kuali_proses"
-frame_progress = 0.4164723
+frame_progress = 0.6334563

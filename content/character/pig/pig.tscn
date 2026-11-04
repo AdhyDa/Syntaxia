@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dvnv45u7vj35n"]
 
 [ext_resource type="PackedScene" uid="uid://c02qfp6h5ud5a" path="res://system/character/animal.tscn" id="1_xt1ub"]
-[ext_resource type="Texture2D" uid="uid://cj5riq1qkpelm" path="res://content/character/pig/Book.png" id="2_yjm2t"]
+[ext_resource type="Texture2D" uid="uid://dgowhfvt48yav" path="res://content/environment/code_grimoire_64.png" id="2_yjm2t"]
 
 [node name="Pig" unique_id=635013980 instance=ExtResource("1_xt1ub")]
 
@@ -9,6 +9,7 @@
 position = Vector2(0, 0)
 
 [node name="Sprite" parent="." index="1"]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_yjm2t")
 offset = Vector2(0, -5)
 hframes = 1
