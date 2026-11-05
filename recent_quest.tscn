@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://ds4k3wnjirfng"]
 
 [ext_resource type="Script" uid="uid://l7w77i2vwju7" path="res://recent_quest.gd" id="1_kpyfa"]
-[ext_resource type="Texture2D" uid="uid://chtybkfroxp8n" path="res://content/ui/quest_panel_hanging.png" id="2_w36yp"]
+[ext_resource type="Texture2D" uid="uid://chtybkfroxp8n" path="res://content/ui/UI_Tempat Quest.png" id="2_w36yp"]
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="3_w36yp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kpyfa"]
 font = ExtResource("3_w36yp")
 font_size = 25
+font_color = Color(1, 0.85490197, 0.49411765, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_w36yp"]
 font = ExtResource("3_w36yp")
 font_size = 12
+font_color = Color(0.93333334, 0.8784314, 0.101960786, 1)
 
 [node name="RecentQuest" type="Control" unique_id=649667955]
 layout_mode = 3

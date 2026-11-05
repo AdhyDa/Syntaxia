@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chtybkfroxp8n"
-path="res://.godot/imported/quest_panel_hanging.png-3eacb391338b9da07d3c556afda6f89a.ctex"
+path="res://.godot/imported/UI_Tempat Quest.png-38801b4b2542d2457924805f93638fbd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/ui/quest_panel_hanging.png"
-dest_files=["res://.godot/imported/quest_panel_hanging.png-3eacb391338b9da07d3c556afda6f89a.ctex"]
+source_file="res://content/ui/UI_Tempat Quest.png"
+dest_files=["res://.godot/imported/UI_Tempat Quest.png-38801b4b2542d2457924805f93638fbd.ctex"]
 
 [params]
 

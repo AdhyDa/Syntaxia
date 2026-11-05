@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgowhfvt48yav"
-path="res://.godot/imported/code_grimoire_64.png-17d11458aeffc824993597d46b200964.ctex"
+uid="uid://b7tfl3jhjp00c"
+path="res://.godot/imported/UI_Resep Ramuan.png-3c6efd6f6f143776e4d940688c21c55a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/environment/code_grimoire_64.png"
-dest_files=["res://.godot/imported/code_grimoire_64.png-17d11458aeffc824993597d46b200964.ctex"]
+source_file="res://content/ui/UI_Resep Ramuan.png"
+dest_files=["res://.godot/imported/UI_Resep Ramuan.png-3c6efd6f6f143776e4d940688c21c55a.ctex"]
 
 [params]
 

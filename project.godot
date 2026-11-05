@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="NinjaAdventure"
-run/main_scene="uid://by5fjij7yiyla"
+run/main_scene="uid://qmc8afmusmml"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.png"

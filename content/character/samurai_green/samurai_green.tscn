@@ -1,12 +1,84 @@
 [gd_scene format=3 uid="uid://cw76qbrkm15gy"]
 
 [ext_resource type="PackedScene" uid="uid://skrlnoimlhsv" path="res://system/character/character.tscn" id="1_4xuoi"]
-[ext_resource type="Texture2D" uid="uid://cr685udyyrsc3" path="res://content/character/samurai_green/Bag.png" id="2_o16oc"]
+[ext_resource type="Texture2D" uid="uid://80nhw4c3xhq2" path="res://content/environment/alchemist_satchel_twinkle_sheet.png" id="2_o16oc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o16oc"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3345"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix5tx"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0ydb"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgbvs"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aptna"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjybq"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiald"]
+atlas = ExtResource("2_o16oc")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ifisb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o16oc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3345")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix5tx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0ydb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgbvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aptna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjybq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiald")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="SamuraiGreen" unique_id=894005264 instance=ExtResource("1_4xuoi")]
 speed = 90.0
 
 [node name="Sprite" parent="." index="2"]
+visible = false
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_o16oc")
-hframes = 1
+hframes = 8
 vframes = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3" unique_id=1945502890]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_ifisb")
+animation = &"idle"
+autoplay = "idle"
