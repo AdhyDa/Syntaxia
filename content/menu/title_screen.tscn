@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dp8tp5wtyhfjb" path="res://content/menu/aset_menu/bg_menu.jpg" id="1_6rr7n"]
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="1_pmwsi"]
 [ext_resource type="Script" uid="uid://y5xhtr8nb2e" path="res://content/menu/btn_start.gd" id="3_gxb8f"]
+[ext_resource type="AudioStream" uid="uid://flvh8ns32iem" path="res://content/environment/Haruko Komiya, ATLUS Sound Team ATLUS GAME MUSIC - 全ての人の魂の詩 - Aria of the Soul.mp3" id="4_rf788"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_imht2"]
 font = ExtResource("1_pmwsi")
@@ -287,3 +288,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.011764706, 0.011764706, 0.011764706, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1235284631]
+stream = ExtResource("4_rf788")
+volume_db = -11.422
+autoplay = true
