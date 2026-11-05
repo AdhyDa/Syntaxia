@@ -4,7 +4,7 @@ extends Control
 @onready var label_objectives: Label = %LabelObjective
 
 func _ready() -> void:
-	set_quest("RAMUAN DASAR", "- Lumina Leaves: 0/3\n- Dew Crystals: 0/1")
+	set_quest("Recent Quest", "- Jahe: 0/1\n- Gula Merah: 0/1")
 	start_sway_animation()
 
 func set_quest(title_text: String, objectives_text: String) -> void:

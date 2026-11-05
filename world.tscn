@@ -264,6 +264,7 @@ transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="PlayerUi" parent="Hud" unique_id=1746786544 instance=ExtResource("15_wger8")]
 unique_name_in_owner = true
+scale = Vector2(0.5912292, 0.5912292)
 
 [node name="RecentQuest" parent="Hud" unique_id=649667955 instance=ExtResource("16_cbp6q")]
 offset_left = -962.0

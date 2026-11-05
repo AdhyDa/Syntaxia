@@ -6,13 +6,15 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_kpyfa"]
 font = ExtResource("3_w36yp")
-font_size = 25
-font_color = Color(0.15191267, 0.17392173, 0.12990363, 1)
+font_size = 28
+font_color = Color(0.7757877, 0.8247878, 0.9905036, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_w36yp"]
 font = ExtResource("3_w36yp")
-font_size = 12
-font_color = Color(0.46666667, 0.84313726, 0.101960786, 1)
+font_size = 17
+font_color = Color(0.97700626, 0.99986845, 0.9679453, 1)
+outline_size = 2
+outline_color = Color(0.14509805, 0.49803922, 0.52156866, 1)
 
 [node name="RecentQuest" type="Control" unique_id=649667955]
 layout_mode = 3
@@ -35,10 +37,10 @@ expand_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1636778498]
 layout_mode = 0
-offset_left = -265.0
-offset_top = 28.0
-offset_right = -183.0
-offset_bottom = 114.0
+offset_left = -262.0
+offset_top = 33.0
+offset_right = -176.0
+offset_bottom = 119.0
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 12

@@ -1,15 +1,20 @@
 extends Control
 
+@onready var gold_label: Label = %GoldLabel
+@onready var exp_bar: TextureProgressBar = %ExpBar
+@onready var exp_label: Label = %ExpLabel
 
-@onready var receptacle_bar: Control = %ReceptacleBar
+func _ready() -> void:
+	# Set nilai awal saat game dimulai
+	update_gold(0)
+	update_exp(0, 100, 1)
 
+# Fungsi untuk mengubah angka Gold
+func update_gold(amount: int) -> void:
+	gold_label.text = str(amount)
 
-var resource_life:ResourceLife:
-	set(v):
-		resource_life = v
-		receptacle_bar.max_life = resource_life.max_life
-		resource_life.life_changed.connect(on_life_changed)
-
-
-func on_life_changed():
-	receptacle_bar.life = resource_life.life
+# Fungsi untuk mengubah Bar EXP dan Level
+func update_exp(current_exp: int, max_exp: int, level: int = 1) -> void:
+	exp_bar.max_value = max_exp
+	exp_bar.value = current_exp
+	exp_label.text = "LV. %d" % level
