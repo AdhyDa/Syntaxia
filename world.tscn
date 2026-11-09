@@ -267,9 +267,9 @@ unique_name_in_owner = true
 scale = Vector2(0.5912292, 0.5912292)
 
 [node name="RecentQuest" parent="Hud" unique_id=649667955 instance=ExtResource("16_cbp6q")]
-offset_left = -962.0
+offset_left = -1448.0
 offset_top = -4.0
-offset_right = -962.0
+offset_right = -1448.0
 offset_bottom = -4.0
 scale = Vector2(0.3, 0.3)
 

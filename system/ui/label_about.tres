@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://cmp8acqcjjnw3"]
+
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="1_3p5ms"]
+
+[resource]
+font = ExtResource("1_3p5ms")
+font_size = 30
+font_color = Color(0, 1, 0.011764706, 1)
+outline_size = 4
+outline_color = Color(0.012617188, 0.012617188, 0.012617188, 1)

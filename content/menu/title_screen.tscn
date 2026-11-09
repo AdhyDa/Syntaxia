@@ -3,11 +3,21 @@
 [ext_resource type="Texture2D" uid="uid://dp8tp5wtyhfjb" path="res://content/menu/aset_menu/bg_menu.jpg" id="1_6rr7n"]
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="1_pmwsi"]
 [ext_resource type="Script" uid="uid://y5xhtr8nb2e" path="res://content/menu/btn_start.gd" id="3_gxb8f"]
+[ext_resource type="Script" uid="uid://b8b2er10vssln" path="res://content/menu/btn_about.gd" id="4_7lbdi"]
+[ext_resource type="Script" uid="uid://crq6ri6s4wnbu" path="res://content/menu/btn_exit.gd" id="4_joqfy"]
 [ext_resource type="AudioStream" uid="uid://flvh8ns32iem" path="res://content/environment/Haruko Komiya, ATLUS Sound Team ATLUS GAME MUSIC - 全ての人の魂の詩 - Aria of the Soul.mp3" id="4_rf788"]
+[ext_resource type="Texture2D" uid="uid://bjkw4gcqd6s6a" path="res://content/menu/about/spellbook_popup_bg.png" id="6_58rk5"]
+[ext_resource type="LabelSettings" uid="uid://do3j3hf7mooey" path="res://system/ui/title_label.tres" id="7_du5gc"]
+[ext_resource type="LabelSettings" uid="uid://cmp8acqcjjnw3" path="res://system/ui/label_about.tres" id="7_u8oox"]
+[ext_resource type="Texture2D" uid="uid://33ymqqctp5cs" path="res://content/menu/about/pak harits pixel-Photoroom.png" id="8_sjbk0"]
+[ext_resource type="Texture2D" uid="uid://cokk5vwwixk6t" path="res://content/menu/about/WhatsApp Image 2026-10-27 at 16.28.16-Photoroom.png" id="9_w43uf"]
+[ext_resource type="Texture2D" uid="uid://jgjo2if86gc6" path="res://content/menu/about/WhatsApp Image 2026-10-27 at 19.37.21-Photoroom.png" id="10_du5gc"]
+[ext_resource type="Texture2D" uid="uid://bs4vmfd2wfqr8" path="res://content/menu/about/wajah pixelate-Photoroom.png" id="11_7lbdi"]
+[ext_resource type="Script" uid="uid://bk33qjnsrip1d" path="res://content/menu/button_close_about.gd" id="14_vry4h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_imht2"]
 font = ExtResource("1_pmwsi")
-font_size = 120
+font_size = 132
 font_color = Color(0, 0.8980392, 1, 1)
 outline_size = 10
 outline_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
@@ -175,8 +185,8 @@ grow_vertical = 2
 
 [node name="BackgroundMenu" type="TextureRect" parent="." unique_id=1287870639]
 layout_mode = 0
-offset_right = 2752.0
-offset_bottom = 1536.0
+offset_right = 4132.519
+offset_bottom = 2306.5225
 scale = Vector2(0.46823734, 0.46823734)
 texture = ExtResource("1_6rr7n")
 
@@ -189,10 +199,11 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -927.0
 offset_top = -438.0
-offset_right = -499.0
-offset_bottom = -327.9986
+offset_right = -457.0
+offset_bottom = -317.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.2884836, 1.2884836)
 theme_override_font_sizes/font_size = 40
 text = "Syntaxia"
 label_settings = SubResource("LabelSettings_imht2")
@@ -212,6 +223,7 @@ offset_right = -595.0
 offset_bottom = -298.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.6969405, 1.6969405)
 text = "Make Potion with Code!"
 label_settings = SubResource("LabelSettings_6rr7n")
 horizontal_alignment = 1
@@ -228,10 +240,11 @@ gravity = Vector2(0, -980)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=746719132]
 layout_mode = 0
-offset_left = 58.0
-offset_top = 531.0
-offset_right = 146.0
-offset_bottom = 669.0
+offset_left = 89.0
+offset_top = 783.0
+offset_right = 195.0
+offset_bottom = 934.0
+scale = Vector2(1.3758652, 1.3758652)
 theme_override_constants/separation = 8
 
 [node name="BtnStart" type="Button" parent="VBoxContainer" unique_id=717719374 node_paths=PackedStringArray("transition_overlay")]
@@ -254,6 +267,7 @@ theme_override_colors/font_hover_color = Color(0.31764707, 0.9490196, 0.09803922
 theme_override_fonts/font = ExtResource("1_pmwsi")
 theme_override_font_sizes/font_size = 40
 text = "ABOUT"
+script = ExtResource("4_7lbdi")
 
 [node name="BtnExit" type="Button" parent="VBoxContainer" unique_id=143532174]
 layout_mode = 2
@@ -263,6 +277,7 @@ theme_override_colors/font_hover_color = Color(1, 0.53113896, 0.65515554, 1)
 theme_override_fonts/font = ExtResource("1_pmwsi")
 theme_override_font_sizes/font_size = 40
 text = "EXIT"
+script = ExtResource("4_joqfy")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1976962332]
 position = Vector2(908.00006, 71.00001)
@@ -284,6 +299,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 647.1892
+offset_bottom = 361.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -293,3 +310,177 @@ color = Color(0.011764706, 0.011764706, 0.011764706, 0)
 stream = ExtResource("4_rf788")
 volume_db = -11.422
 autoplay = true
+
+[node name="AboutPanel" type="TextureRect" parent="." unique_id=1119201663]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -677.6
+offset_top = -423.5
+offset_right = 677.6
+offset_bottom = 423.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_58rk5")
+
+[node name="MarginContainer" type="MarginContainer" parent="AboutPanel" unique_id=2087954187]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -582.0
+offset_top = -327.0
+offset_right = 584.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AboutPanel/MarginContainer" unique_id=71281180]
+layout_mode = 2
+
+[node name="HalamanKiri" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer" unique_id=995942801]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dosen" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=464707260]
+layout_mode = 2
+text = "Dosen Pengampu"
+label_settings = ExtResource("7_du5gc")
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=1538548263]
+layout_mode = 2
+text = "Harits Ar Rosyid, S.T., M.T., Ph.D."
+label_settings = ExtResource("7_u8oox")
+
+[node name="NIP" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=442962548]
+layout_mode = 2
+text = "198108112009121003"
+label_settings = ExtResource("7_u8oox")
+
+[node name="FotoPakHarits" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=1741214040]
+custom_minimum_size = Vector2(400, 450)
+layout_mode = 2
+texture = ExtResource("8_sjbk0")
+expand_mode = 2
+
+[node name="HalamanKanan" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer" unique_id=1772882866]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="Label" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=451517868]
+layout_mode = 2
+text = "TIM PENGEMBANG"
+label_settings = ExtResource("7_du5gc")
+
+[node name="DevRows1" type="HBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=1302203301]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1" unique_id=1985738341]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("9_w43uf")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1" unique_id=592003402]
+layout_mode = 2
+alignment = 1
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1/VBoxContainer" unique_id=1287222033]
+layout_mode = 2
+text = "Adhyaksa Daudi Musthofa Akhyar"
+label_settings = ExtResource("7_u8oox")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NIM" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1/VBoxContainer" unique_id=1795741488]
+layout_mode = 2
+text = "240533603336"
+label_settings = ExtResource("7_u8oox")
+
+[node name="Job" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1/VBoxContainer" unique_id=1150587304]
+layout_mode = 2
+text = "Project + Level"
+label_settings = ExtResource("7_u8oox")
+
+[node name="DevRows2" type="HBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=254837453]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2" unique_id=2141885322]
+custom_minimum_size = Vector2(50, 150)
+layout_mode = 2
+texture = ExtResource("10_du5gc")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2" unique_id=584068387]
+layout_mode = 2
+alignment = 1
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2/VBoxContainer" unique_id=2122264143]
+layout_mode = 2
+text = "abraham miko pratama"
+label_settings = ExtResource("7_u8oox")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NIM" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2/VBoxContainer" unique_id=853511891]
+layout_mode = 2
+text = "240533600750"
+label_settings = ExtResource("7_u8oox")
+
+[node name="Job" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2/VBoxContainer" unique_id=795985321]
+layout_mode = 2
+text = "Programmer"
+label_settings = ExtResource("7_u8oox")
+
+[node name="DevRows3" type="HBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=114260830]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3" unique_id=521968280]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("11_7lbdi")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3" unique_id=1318887563]
+layout_mode = 2
+alignment = 1
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3/VBoxContainer" unique_id=1267552279]
+layout_mode = 2
+text = "farel farizi purnomosasi"
+label_settings = ExtResource("7_u8oox")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NIM" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3/VBoxContainer" unique_id=208337197]
+layout_mode = 2
+text = "240533605901"
+label_settings = ExtResource("7_u8oox")
+
+[node name="Job" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3/VBoxContainer" unique_id=550676416]
+layout_mode = 2
+text = "Artist"
+label_settings = ExtResource("7_u8oox")
+
+[node name="ButtonCloseAbout" type="Button" parent="AboutPanel" unique_id=1615007125]
+layout_mode = 0
+offset_left = 1259.6
+offset_top = 63.5
+offset_right = 1277.6
+offset_bottom = 94.5
+theme_override_colors/font_color = Color(1, 0.25490198, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.5764706, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "X"
+script = ExtResource("14_vry4h")
