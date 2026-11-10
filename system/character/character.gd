@@ -26,7 +26,6 @@ signal teleported
 	set(v):
 		team = v
 
-
 var actor:ActorSprite
 var move_vector := Vector2.ZERO:
 	set(v):

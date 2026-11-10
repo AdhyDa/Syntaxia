@@ -14,11 +14,16 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="NinjaAdventure"
+config/name="Syntaxia"
 run/main_scene="uid://by5fjij7yiyla"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.png"
+
+[autoload]
+
+_mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+PlayerInventory="*res://system/inventory/player_inventory.gd"
 
 [display]
 
@@ -26,6 +31,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_ai/plugin.cfg")
 
 [file_customization]
 

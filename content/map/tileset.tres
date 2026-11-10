@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://dga8b4mbpf0ch" path="res://content/map/tileset_interior_floor.png" id="3_0t6wa"]
 [ext_resource type="Texture2D" uid="uid://dseocn2by32rs" path="res://content/map/tileset_wall_simple.png" id="4_dtrnm"]
 [ext_resource type="Texture2D" uid="uid://44k1t5e1t2uo" path="res://content/map/tileset_animated.png" id="4_tkv0l"]
-[ext_resource type="PackedScene" uid="uid://dc2otpemqpad2" path="res://content/destroyable/crate.tscn" id="6_02y58"]
-[ext_resource type="PackedScene" uid="uid://domrx1cgi35kg" path="res://content/destroyable/grass.tscn" id="7_5llc0"]
-[ext_resource type="PackedScene" uid="uid://dxma3r6xd3454" path="res://content/destroyable/pot.tscn" id="8_aa2g8"]
+[ext_resource type="PackedScene" uid="uid://dc2otpemqpad2" path="res://content/collectible/bahan/crate.tscn" id="6_02y58"]
+[ext_resource type="PackedScene" uid="uid://domrx1cgi35kg" path="res://content/collectible/bahan/grass.tscn" id="7_5llc0"]
+[ext_resource type="PackedScene" uid="uid://dxma3r6xd3454" path="res://content/collectible/bahan/pot.tscn" id="8_aa2g8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5tek"]
 texture = ExtResource("1_whwpt")

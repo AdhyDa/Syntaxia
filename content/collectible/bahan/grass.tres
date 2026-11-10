@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3]
+
+[ext_resource type="Script" path="res://system/collectible/resource_collectible.gd" id="1_rescol"]
+[ext_resource type="Texture2D" uid="uid://bi6x2xy0kcgn7" path="res://content/collectible/bahan/grass.png" id="2_grasstex"]
+
+[resource]
+script = ExtResource("1_rescol")
+item_id = "grass"
+display_name = "Rumput"
+icon = ExtResource("2_grasstex")
