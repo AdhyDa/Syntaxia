@@ -16,7 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://ds4k3wnjirfng" path="res://recent_quest.tscn" id="16_cbp6q"]
 [ext_resource type="Shader" uid="uid://bx4y5jno6aefx" path="res://system/shader/shader_moving_texture.gdshader" id="16_fmd6i"]
 [ext_resource type="Texture2D" uid="uid://dxic1avnc53ct" path="res://system/environment/fx/fog.png" id="16_wcll6"]
+[ext_resource type="Texture2D" uid="uid://bjrrddxkf54qd" path="res://content/ui/UI assets Demo (3x).png" id="17_26xuy"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="17_bc84e"]
+[ext_resource type="Script" uid="uid://bah5re32ky3gq" path="res://pause_menu_ui.gd" id="17_mc2jv"]
 [ext_resource type="Script" uid="uid://csxp8ciln6js2" path="res://system/transition/transition.gd" id="20_5rxny"]
+[ext_resource type="Texture2D" uid="uid://b7tfl3jhjp00c" path="res://content/ui/UI_Resep Ramuan.png" id="20_bo7i5"]
+[ext_resource type="StyleBox" uid="uid://dfpsqicdo3ci0" path="res://new_style_box_texture.tres" id="21_4h6ng"]
+[ext_resource type="StyleBox" uid="uid://doy4gl821tkth" path="res://new_style_box_texture_pressed.tres" id="22_o3ebs"]
+[ext_resource type="StyleBox" uid="uid://bi1dink3lthyx" path="res://exit.tres" id="23_bo7i5"]
 [ext_resource type="Material" uid="uid://d388iuq2hfgth" path="res://system/color_correction/material.tres" id="28_nkm27"]
 [ext_resource type="Script" uid="uid://da6et316v0dn7" path="res://system/color_correction/color_correction.gd" id="29_12dcn"]
 
@@ -156,6 +163,34 @@ color = Color(1, 1, 1, 0.152941)
 color_ramp = SubResource("GradientTexture1D_ypw10")
 anim_offset_max = 1.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uupxc"]
+atlas = ExtResource("17_26xuy")
+region = Rect2(546.3594, 432.25305, 60.645935, 48.755737)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ifisb"]
+texture = SubResource("AtlasTexture_uupxc")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjb0r"]
+atlas = ExtResource("17_26xuy")
+region = Rect2(453.4079, 390.02972, 52.924744, 39.95639)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_il2jm"]
+texture = SubResource("AtlasTexture_wjb0r")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wukud"]
+atlas = ExtResource("17_26xuy")
+region = Rect2(546.036, 386.74152, 59.61975, 42.58072)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bc84e"]
+texture = SubResource("AtlasTexture_wukud")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ifisb"]
+font = ExtResource("17_bc84e")
+font_size = 120
+font_color = Color(0.39607844, 0.41960785, 1, 1)
+outline_size = 10
+outline_color = Color(0.42745098, 0.24313726, 0, 1)
+
 [sub_resource type="Gradient" id="Gradient_kshit"]
 offsets = PackedFloat32Array(0, 0.723172, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.57992, 0.278237, 0.497348, 1, 1, 1, 1, 1)
@@ -259,19 +294,136 @@ bus = &"Music"
 script = ExtResource("10_4llys")
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=140710527]
-scale = Vector2(4, 4)
-transform = Transform2D(4, 0, 0, 4, 0, 0)
 
 [node name="PlayerUi" parent="Hud" unique_id=1746786544 instance=ExtResource("15_wger8")]
 unique_name_in_owner = true
-scale = Vector2(0.5912292, 0.5912292)
+offset_left = 29.0
+offset_top = 22.0
+offset_right = 65.0
+offset_bottom = 57.0
+scale = Vector2(3, 3)
 
 [node name="RecentQuest" parent="Hud" unique_id=649667955 instance=ExtResource("16_cbp6q")]
-offset_left = -1448.0
-offset_top = -4.0
-offset_right = -1448.0
-offset_bottom = -4.0
-scale = Vector2(0.3, 0.3)
+offset_left = -7.999878
+offset_top = -5.0
+offset_right = -7.999878
+offset_bottom = -5.0
+scale = Vector2(1.5, 1.5)
+
+[node name="PauseMenuUI" type="Control" parent="Hud" unique_id=1283899658]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_mc2jv")
+
+[node name="BtnMenuToggle" type="Button" parent="Hud/PauseMenuUI" unique_id=1803296233]
+custom_minimum_size = Vector2(140, 90)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_top = 3.0
+offset_right = 83.0
+offset_bottom = 93.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("17_bc84e")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxTexture_ifisb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_il2jm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bc84e")
+text = "MENU"
+
+[node name="PauseOverlay" type="ColorRect" parent="Hud/PauseMenuUI" unique_id=2006305844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5372549)
+
+[node name="PausePanel" type="TextureRect" parent="Hud/PauseMenuUI/PauseOverlay" unique_id=1004185477]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -324.0
+offset_right = 1116.9775
+offset_bottom = 856.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("20_bo7i5")
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud/PauseMenuUI/PauseOverlay/PausePanel" unique_id=1670705817]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 200
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hud/PauseMenuUI/PauseOverlay/PausePanel/MarginContainer" unique_id=1003773204]
+custom_minimum_size = Vector2(500, 800)
+layout_mode = 2
+theme_override_constants/separation = 29
+
+[node name="Label" type="Label" parent="Hud/PauseMenuUI/PauseOverlay/PausePanel/MarginContainer/VBoxContainer" unique_id=849366123]
+layout_mode = 2
+text = "PAUSE"
+label_settings = SubResource("LabelSettings_ifisb")
+horizontal_alignment = 1
+
+[node name="BtnResume" type="Button" parent="Hud/PauseMenuUI/PauseOverlay/PausePanel/MarginContainer/VBoxContainer" unique_id=689523159]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.8745098, 0.8745098, 0.5529412, 1)
+theme_override_fonts/font = ExtResource("17_bc84e")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = ExtResource("21_4h6ng")
+theme_override_styles/pressed = ExtResource("22_o3ebs")
+theme_override_styles/hover = ExtResource("21_4h6ng")
+text = "Resume"
+
+[node name="BtnRetry" type="Button" parent="Hud/PauseMenuUI/PauseOverlay/PausePanel/MarginContainer/VBoxContainer" unique_id=1415275515]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.8745098, 0.8745098, 0.5529412, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 4
+theme_override_fonts/font = ExtResource("17_bc84e")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = ExtResource("21_4h6ng")
+theme_override_styles/pressed = ExtResource("22_o3ebs")
+theme_override_styles/hover = ExtResource("21_4h6ng")
+text = "Restart"
+
+[node name="BtnExit" type="Button" parent="Hud/PauseMenuUI/PauseOverlay/PausePanel/MarginContainer/VBoxContainer" unique_id=156939446]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_hover_color = Color(0.8980392, 0.7490196, 0.21568628, 1)
+theme_override_fonts/font = ExtResource("17_bc84e")
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = ExtResource("23_bo7i5")
+theme_override_styles/pressed = ExtResource("22_o3ebs")
+theme_override_styles/hover = ExtResource("23_bo7i5")
+text = "Exit"
 
 [node name="ScreenFxLayer" type="CanvasLayer" parent="." unique_id=171547922]
 layer = 10
