@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceCollectible" format=3]
+
+[ext_resource type="Script" uid="uid://dvvolxuw7jeb7" path="res://system/collectible/resource_collectible.gd" id="1_rescol"]
+[ext_resource type="Texture2D" uid="uid://dq3jnvcutl1qq" path="res://content/collectible/bahan/serai.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_rescol")
+item_id = "serai"
+display_name = "Serai"
+icon = ExtResource("2_tex")
+

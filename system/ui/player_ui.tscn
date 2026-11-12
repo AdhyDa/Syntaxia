@@ -67,3 +67,10 @@ value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("4_uwbna")
 texture_progress = ExtResource("5_4fr4j")
+
+[node name="CollectibleContainer" type="HFlowContainer" parent="MainMargin/VBoxContainer" unique_id=1498321045]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 3

@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://b6vodxc0miclw" path="res://system/destroyable/destroyable.tscn" id="1_dest"]
+[ext_resource type="Script" uid="uid://0cn4yup57a3j" path="res://system/stat/life/resource_life.gd" id="2_life"]
+[ext_resource type="Texture2D" uid="uid://b82r558f3aa3y" path="res://content/collectible/bahan/beras.png" id="3_tex"]
+[ext_resource type="PackedScene" path="res://content/collectible/bahan/berasbahan.tscn" id="4_drop"]
+
+[sub_resource type="Resource" id="Resource_life"]
+resource_local_to_scene = true
+script = ExtResource("2_life")
+max_life = 1.0
+life = 1.0
+
+[node name="Beras" instance=ExtResource("1_dest")]
+life = SubResource("Resource_life")
+drop_item_scene = ExtResource("4_drop")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.085, 0.085)
+texture = ExtResource("3_tex")

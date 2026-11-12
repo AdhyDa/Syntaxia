@@ -1,6 +1,6 @@
-[gd_resource type="Resource" format=3]
+[gd_resource type="Resource" script_class="ResourceCollectible" format=3 uid="uid://duk6l3jsmjn37"]
 
-[ext_resource type="Script" path="res://system/collectible/resource_collectible.gd" id="1_rescol"]
+[ext_resource type="Script" uid="uid://dvvolxuw7jeb7" path="res://system/collectible/resource_collectible.gd" id="1_rescol"]
 [ext_resource type="Texture2D" uid="uid://bi6x2xy0kcgn7" path="res://content/collectible/bahan/grass.png" id="2_grasstex"]
 
 [resource]

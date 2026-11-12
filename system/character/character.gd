@@ -9,9 +9,9 @@ enum State{IDLE}
 signal teleported
 
 @export_category("physics")
-@export var speed = 100.0
-@export var acceleration = 1000.0
-@export var deceleration = 800.0
+@export var speed = 80.0
+@export var acceleration = 600.0
+@export var deceleration = 400.0
 
 @export var actor_scene:PackedScene:
 	set(v):
