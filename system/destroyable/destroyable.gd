@@ -5,6 +5,14 @@ class_name Destroyable
 
 
 @export var life:ResourceLife
+
+## Scene item (Collectible) yang akan di-drop saat objek hancur.
+## Atur di Inspector tiap scene turunan (crate, grass, pot).
+@export var drop_item_scene:PackedScene
+
+## Peluang drop item (0.0 = tidak pernah, 1.0 = selalu drop).
+@export_range(0.0, 1.0) var drop_chance:float = 1.0
+
 var push_velocity:= Vector2.ZERO
 
 @onready var sprite: Sprite2D = $Sprite
@@ -58,8 +66,20 @@ func flash(time = 0.2):
 
 func destroy():
 	collision_layer = 0
+	spawn_drop()
 	await damage_fx()
 	sprite.visible = false
 	hitbox.disable()
 	await get_tree().create_timer(2.0).timeout
 	queue_free()
+
+
+func spawn_drop() -> void:
+	if not drop_item_scene:
+		return
+	if randf() > drop_chance:
+		return
+	var item = drop_item_scene.instantiate()
+	# Tambahkan ke parent agar tidak ikut queue_free bersama destroyable
+	get_parent().add_child(item)
+	item.global_position = global_position

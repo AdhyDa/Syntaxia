@@ -234,7 +234,7 @@ autoplay = &"floating"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=384109141]
 modulate = Color(0.2, 1, 1, 1)
-position = Vector2(902, 420)
+position = Vector2(1347, 525)
 amount = 15
 gravity = Vector2(0, -980)
 
@@ -280,14 +280,14 @@ text = "EXIT"
 script = ExtResource("4_joqfy")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1976962332]
-position = Vector2(908.00006, 71.00001)
+position = Vector2(1450, 312)
 scale = Vector2(0.5270071, 1.7341572)
 color = Color(1, 0, 0.47843137, 1)
 texture = SubResource("GradientTexture2D_ifisb")
 texture_scale = 6.48
 
 [node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1960313705]
-position = Vector2(941.00006, 67.00001)
+position = Vector2(1291, 307)
 scale = Vector2(0.5270071, 1.7341572)
 color = Color(0, 0.8980392, 1, 1)
 energy = 1.09
