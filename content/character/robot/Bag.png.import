@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cj5riq1qkpelm"
-path="res://.godot/imported/Book.png-f3d6740a8ac76772e1726f4a3b7c84a7.ctex"
+uid="uid://cr685udyyrsc3"
+path="res://.godot/imported/Bag.png-35f05fa9ea415db0b26b47ba20295459.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/character/pig/Book.png"
-dest_files=["res://.godot/imported/Book.png-f3d6740a8ac76772e1726f4a3b7c84a7.ctex"]
+source_file="res://content/character/robot/Bag.png"
+dest_files=["res://.godot/imported/Bag.png-35f05fa9ea415db0b26b47ba20295459.ctex"]
 
 [params]
 

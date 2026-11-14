@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr685udyyrsc3"
-path="res://.godot/imported/Bag.png-3587c19e382921e6781b8fb5329713a5.ctex"
+uid="uid://bkrr5rbju2lx"
+path="res://.godot/imported/SpriteSheet_remodel.png-e6de94bc9ff8d4427686f0cfe9fefc55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/character/samurai_green/Bag.png"
-dest_files=["res://.godot/imported/Bag.png-3587c19e382921e6781b8fb5329713a5.ctex"]
+source_file="res://content/character/player/SpriteSheet_remodel.png"
+dest_files=["res://.godot/imported/SpriteSheet_remodel.png-e6de94bc9ff8d4427686f0cfe9fefc55.ctex"]
 
 [params]
 

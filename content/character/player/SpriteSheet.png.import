@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hfa5b4xd6u8x"
-path="res://.godot/imported/sprite.png-93c4dd5515903d0dda5cc151b51656b3.ctex"
+uid="uid://vmy0xv7bkdev"
+path="res://.godot/imported/SpriteSheet.png-9567d8ff37f97a454b5cc7fdf180ce94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/character/samurai_blue/sprite.png"
-dest_files=["res://.godot/imported/sprite.png-93c4dd5515903d0dda5cc151b51656b3.ctex"]
+source_file="res://content/character/player/SpriteSheet.png"
+dest_files=["res://.godot/imported/SpriteSheet.png-9567d8ff37f97a454b5cc7fdf180ce94.ctex"]
 
 [params]
 

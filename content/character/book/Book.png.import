@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkrr5rbju2lx"
-path="res://.godot/imported/SpriteSheet_remodel.png-27ac2457467ae88220644e9166356198.ctex"
+uid="uid://cj5riq1qkpelm"
+path="res://.godot/imported/Book.png-48875e286bb63118cc53a28b88810458.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/character/main_character/SpriteSheet_remodel.png"
-dest_files=["res://.godot/imported/SpriteSheet_remodel.png-27ac2457467ae88220644e9166356198.ctex"]
+source_file="res://content/character/book/Book.png"
+dest_files=["res://.godot/imported/Book.png-48875e286bb63118cc53a28b88810458.ctex"]
 
 [params]
 

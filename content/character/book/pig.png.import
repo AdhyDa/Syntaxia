@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb1puhmg81h5p"
-path="res://.godot/imported/sprite.png-f10c45261020b6c9104f617f35b6d200.ctex"
+uid="uid://cir7t2mluuc7s"
+path="res://.godot/imported/pig.png-84e16d620d7122ade3fc0578259e1b31.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/character/ninja_blue/sprite.png"
-dest_files=["res://.godot/imported/sprite.png-f10c45261020b6c9104f617f35b6d200.ctex"]
+source_file="res://content/character/book/pig.png"
+dest_files=["res://.godot/imported/pig.png-84e16d620d7122ade3fc0578259e1b31.ctex"]
 
 [params]
 
