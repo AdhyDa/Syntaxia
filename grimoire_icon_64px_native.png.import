@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4aamlo2a400l"
-path="res://.godot/imported/TilesetElement.png-251508865e80ddcbeb9ff54632fa6dd2.ctex"
+uid="uid://cm0v0yp77ibv7"
+path="res://.godot/imported/grimoire_icon_64px_native.png-6346c5ba80d752674ac599198a20f5fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/map/kumpulan_tileset_baru/TilesetElement.png"
-dest_files=["res://.godot/imported/TilesetElement.png-251508865e80ddcbeb9ff54632fa6dd2.ctex"]
+source_file="res://grimoire_icon_64px_native.png"
+dest_files=["res://.godot/imported/grimoire_icon_64px_native.png-6346c5ba80d752674ac599198a20f5fc.ctex"]
 
 [params]
 
