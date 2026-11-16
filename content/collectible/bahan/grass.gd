@@ -7,8 +7,8 @@ class_name Grass
 	"air": 25.0,
 	"jahe": 20.0,
 	"serai": 20.0,    
-	"kencur": 11.5,	
-	"beras": 11.5,  
+	"kencur": 11.5,
+	"beras": 11.5,
 	"gulamerah": 6.0,
 	"asamjawa": 6.0  
 }

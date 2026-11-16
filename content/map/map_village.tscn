@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://cnuxju0tl6cry" path="res://system/teleporter/teleporter.gd" id="18_rh3ex"]
 [ext_resource type="PackedScene" path="res://system/spawner/grass_spawner.tscn" id="19_spawner"]
 [ext_resource type="Script" uid="uid://cvyy0iypq6esc" path="res://content/character/NPC/nara_interaction.gd" id="20_nara"]
+[ext_resource type="Script" uid="uid://felgvips8h" path="res://content/environment/toko_interaction.gd" id="21_toko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uupxc"]
 size = Vector2(160.93558, 153.45029)
@@ -144,6 +145,7 @@ position = Vector2(-211, -159)
 scale = Vector2(0.534375, 0.534375)
 texture = ExtResource("2_alfly")
 offset = Vector2(0, -75)
+script = ExtResource("21_toko")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Tilemap/Toko" index="0" unique_id=1704543227]
 
