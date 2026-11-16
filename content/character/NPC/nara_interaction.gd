@@ -62,15 +62,26 @@ func _ready() -> void:
 		original_speed = parent_npc.speed
 
 
+func _is_player(body: Node2D) -> bool:
+	# Eksklusi NPC, companion, dan diri sendiri agar tidak memicu deteksi palsu
+	var lower_name: String = body.name.to_lower()
+	if lower_name.contains("npc") or lower_name.contains("nara") \
+	or lower_name.contains("book") or lower_name.contains("robot"):
+		return false
+	return body.is_in_group("player") \
+		or lower_name.contains("ninja") \
+		or lower_name.contains("player")
+
+
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") or body is CharacterBody2D or body.name.to_lower().contains("ninja") or body.name.to_lower().contains("player"):
+	if _is_player(body):
 		player_in_range = true
 		if prompt_label:
 			prompt_label.visible = true
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player") or body is CharacterBody2D or body.name.to_lower().contains("ninja") or body.name.to_lower().contains("player"):
+	if _is_player(body):
 		player_in_range = false
 		if prompt_label:
 			prompt_label.visible = false

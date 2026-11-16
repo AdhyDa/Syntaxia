@@ -318,7 +318,7 @@ offset_bottom = 72.0
 theme_override_colors/font_color = Color(0.2, 0.45, 0.15, 1)
 theme_override_fonts/font = ExtResource("13_font")
 theme_override_font_sizes/font_size = 42
-text = "6 Coin"
+text = "6"
 horizontal_alignment = 1
 
 [node name="ButtonsVBox" type="Control" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox" unique_id=2137068728]

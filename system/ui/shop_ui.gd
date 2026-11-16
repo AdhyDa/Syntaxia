@@ -14,6 +14,7 @@ const TEX_SLOT_SELECTED: Texture2D = preload("res://content/ui/shop_ui/slot_sele
 const TEX_SLOT_EMPTY_LOCKED: Texture2D = preload("res://content/ui/shop_ui/slot_empty_locked.png")
 
 const TEX_SHOP_CARD: Texture2D = preload("res://content/ui/shop_ui/shop_item_card.png")
+const TEX_COIN: Texture2D = preload("res://content/collectible/coin/Coin2.png")
 
 const TEX_TAB_NORMAL: Texture2D = preload("res://content/ui/shop_ui/tab_normal.png")
 const TEX_TAB_HOVER: Texture2D = preload("res://content/ui/shop_ui/tab_hover.png")
@@ -41,6 +42,10 @@ const TEX_BTN_PRESSED: Texture2D = preload("res://content/ui/shop_ui/button_pres
 var current_mode: ShopMode = ShopMode.BUY
 var selected_item_id: String = "air"
 
+# HBox harga di panel kanan (angka + ikon koin), dibuat dinamis di _ready()
+var _detail_price_hbox: HBoxContainer = null
+var _detail_price_number_lbl: Label = null
+
 
 func _ready() -> void:
 	# Hubungkan tombol tab
@@ -61,6 +66,29 @@ func _ready() -> void:
 	if is_instance_valid(PlayerInventory):
 		PlayerInventory.item_added.connect(_on_inventory_changed)
 		PlayerInventory.item_removed.connect(_on_inventory_changed)
+	
+	# Sembunyikan DetailPriceLabel tscn dan ganti dengan HBox (angka + ikon koin)
+	if detail_price_label:
+		detail_price_label.visible = false
+		var parent_node := detail_price_label.get_parent()
+		
+		_detail_price_hbox = HBoxContainer.new()
+		_detail_price_hbox.layout_mode = 0
+		_detail_price_hbox.position = detail_price_label.position
+		_detail_price_hbox.size = detail_price_label.size
+		_detail_price_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+		
+		_detail_price_number_lbl = Label.new()
+		_detail_price_number_lbl.add_theme_font_override("font", UI_FONT)
+		_detail_price_number_lbl.add_theme_font_size_override("font_size", 42)
+		_detail_price_number_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_detail_price_number_lbl.text = "0"
+		_detail_price_hbox.add_child(_detail_price_number_lbl)
+		
+		var coin_icon := _make_coin_icon(42.0)
+		_detail_price_hbox.add_child(coin_icon)
+		
+		parent_node.add_child(_detail_price_hbox)
 		
 	# Bekukan kontrol pemain saat berbelanja
 	_freeze_player(true)
@@ -194,6 +222,44 @@ func refresh_ui() -> void:
 	_render_right_detail_panel()
 
 
+## Membuat TextureRect ikon koin dari sprite sheet Coin2.png (frame pertama 10×10)
+func _make_coin_icon(size: float = 20.0) -> TextureRect:
+	var atlas := AtlasTexture.new()
+	atlas.atlas = TEX_COIN
+	atlas.region = Rect2(0, 0, 10, 10)
+	var tex_rect := TextureRect.new()
+	tex_rect.texture = atlas
+	tex_rect.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	tex_rect.custom_minimum_size = Vector2(size, size)
+	tex_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	tex_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return tex_rect
+
+
+## Membuat HBoxContainer berisi [angka] [ikon koin]
+func _make_price_hbox(amount: int, font_size: int, font_color: Color, hbox_size: Vector2, pos: Vector2 = Vector2.ZERO) -> HBoxContainer:
+	var hbox := HBoxContainer.new()
+	hbox.position = pos
+	hbox.size = hbox_size
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var lbl := Label.new()
+	lbl.text = "%d" % amount
+	lbl.add_theme_font_override("font", UI_FONT)
+	lbl.add_theme_font_size_override("font_size", font_size)
+	lbl.add_theme_color_override("font_color", font_color)
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hbox.add_child(lbl)
+
+	var icon := _make_coin_icon(font_size * 1.1)
+	hbox.add_child(icon)
+
+	return hbox
+
+
 func _render_item_cards() -> void:
 	if not item_grid_container:
 		return
@@ -275,26 +341,17 @@ func _create_card_node(it_id: String) -> Control:
 		
 	slot_frame.add_child(icon_tex)
 	
-	# Label Harga di Bagian Bawah Kartu
-	var price_lbl = Label.new()
-	price_lbl.position = Vector2(10, 165)
-	price_lbl.size = Vector2(220, 45)
-	price_lbl.add_theme_font_override("font", UI_FONT)
-	price_lbl.add_theme_font_size_override("font_size", 24)
-	price_lbl.add_theme_color_override("font_color", Color(0.24, 0.14, 0.08, 1))
-	price_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	price_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	price_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	var price_val = 0
+	# HBox Harga (angka + ikon koin) di Bagian Bawah Kartu
+	var price_val: int = 0
 	if is_instance_valid(QuestManager):
 		if current_mode == ShopMode.BUY:
 			price_val = QuestManager.get_item_buy_price(it_id)
 		else:
 			price_val = QuestManager.get_item_sell_price(it_id)
 			
-	price_lbl.text = "%d G" % price_val
-	card_btn.add_child(price_lbl)
+	var price_color := Color(0.24, 0.14, 0.08, 1)
+	var price_hbox := _make_price_hbox(price_val, 24, price_color, Vector2(220, 45), Vector2(10, 165))
+	card_btn.add_child(price_hbox)
 	
 	# Connect Klik Kartu
 	card_btn.pressed.connect(func():
@@ -330,8 +387,10 @@ func _render_right_detail_panel() -> void:
 	
 	# Info Harga & Tombol Aksi
 	if current_mode == ShopMode.BUY:
-		detail_price_label.text = "%d Coin" % buy_price
-		detail_price_label.add_theme_color_override("font_color", Color(0.18, 0.45, 0.14, 1))
+		# Update HBox harga: angka hijau + ikon koin
+		if _detail_price_number_lbl:
+			_detail_price_number_lbl.text = "%d" % buy_price
+			_detail_price_number_lbl.add_theme_color_override("font_color", Color(0.18, 0.45, 0.14, 1))
 		action_label.text = "BUY"
 		
 		# Validasi Tombol BUY: Disabled jika koin kurang ATAU stok tas sudah penuh 5/5
@@ -340,8 +399,10 @@ func _render_right_detail_panel() -> void:
 		btn_action.modulate = Color(1, 1, 1, 1) if can_buy else Color(0.65, 0.65, 0.65, 0.7)
 		btn_action.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if can_buy else Control.CURSOR_ARROW
 	else:
-		detail_price_label.text = "%d Coin" % sell_price
-		detail_price_label.add_theme_color_override("font_color", Color(0.55, 0.3, 0.05, 1))
+		# Update HBox harga: angka coklat + ikon koin
+		if _detail_price_number_lbl:
+			_detail_price_number_lbl.text = "%d" % sell_price
+			_detail_price_number_lbl.add_theme_color_override("font_color", Color(0.55, 0.3, 0.05, 1))
 		action_label.text = "SELL"
 		
 		# Validasi Tombol SELL: Disabled jika stok di tas 0
