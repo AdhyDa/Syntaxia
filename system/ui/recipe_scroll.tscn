@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://qmc8afmusmml"]
 
 [ext_resource type="Script" uid="uid://bdx5og8v78a2h" path="res://recipe_scroll.gd" id="1_qal0s"]
-[ext_resource type="Texture2D" uid="uid://b7tfl3jhjp00c" path="res://content/ui/UI_Resep Ramuan.png" id="2_taqly"]
+[ext_resource type="Texture2D" uid="uid://b7tfl3jhjp00c" path="res://content/ui/UI_QuestList.png" id="2_taqly"]
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="3_taqly"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qal0s"]

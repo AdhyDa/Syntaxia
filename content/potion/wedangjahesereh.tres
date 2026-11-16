@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceCollectible" format=3]
+
+[ext_resource type="Script" uid="uid://dvvolxuw7jeb7" path="res://system/collectible/resource_collectible.gd" id="1_rescol"]
+[ext_resource type="Texture2D" uid="uid://gp4gog56ojtf" path="res://content/potion/FireResistance.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_rescol")
+item_id = "wedangjahesereh"
+display_name = "Wedang Jahe Sereh"
+icon = ExtResource("2_tex")

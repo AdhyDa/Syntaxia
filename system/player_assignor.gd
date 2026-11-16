@@ -8,6 +8,8 @@ func _ready() -> void:
 	var player:CharacterBody2D = get_parent()
 	player.add_to_group("player")
 	var human_controller = HumanController.new()
+	human_controller.name = "HumanController"
+	human_controller.add_to_group("player_controller")
 	player.call_deferred("add_child",human_controller)
 	player.set_collision_layer_value(COLLISION_MASK_PLAYER,true)
 	

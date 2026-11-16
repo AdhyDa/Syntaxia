@@ -20,7 +20,7 @@
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="17_bc84e"]
 [ext_resource type="Script" uid="uid://bah5re32ky3gq" path="res://pause_menu_ui.gd" id="17_mc2jv"]
 [ext_resource type="Script" uid="uid://csxp8ciln6js2" path="res://system/transition/transition.gd" id="20_5rxny"]
-[ext_resource type="Texture2D" uid="uid://b7tfl3jhjp00c" path="res://content/ui/UI_Resep Ramuan.png" id="20_bo7i5"]
+[ext_resource type="Texture2D" uid="uid://b7tfl3jhjp00c" path="res://content/ui/UI_QuestList.png" id="20_bo7i5"]
 [ext_resource type="StyleBox" uid="uid://dfpsqicdo3ci0" path="res://new_style_box_texture.tres" id="21_4h6ng"]
 [ext_resource type="StyleBox" uid="uid://doy4gl821tkth" path="res://new_style_box_texture_pressed.tres" id="22_o3ebs"]
 [ext_resource type="StyleBox" uid="uid://bi1dink3lthyx" path="res://exit.tres" id="23_bo7i5"]
@@ -312,6 +312,7 @@ scale = Vector2(1.5, 1.5)
 
 [node name="PauseMenuUI" type="Control" parent="Hud" unique_id=1283899658]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

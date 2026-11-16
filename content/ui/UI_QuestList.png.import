@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqbbyaidlyfp7"
-path="res://.godot/imported/LifePot.png-a495e51f81abd57ff78301a2d749c729.ctex"
+uid="uid://b7tfl3jhjp00c"
+path="res://.godot/imported/UI_QuestList.png-e55a9ef9b3ef4e01909278435591c7d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/potion/LifePot.png"
-dest_files=["res://.godot/imported/LifePot.png-a495e51f81abd57ff78301a2d749c729.ctex"]
+source_file="res://content/ui/UI_QuestList.png"
+dest_files=["res://.godot/imported/UI_QuestList.png-e55a9ef9b3ef4e01909278435591c7d8.ctex"]
 
 [params]
 

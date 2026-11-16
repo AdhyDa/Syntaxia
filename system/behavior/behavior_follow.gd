@@ -15,10 +15,15 @@ class_name BehaviorFollow
 		update_process()
 @export var target:Node2D:
 	set(v):
+		if target and is_instance_valid(target) and target.has_signal("teleported"):
+			if target.teleported.is_connected(on_target_teleported):
+				target.teleported.disconnect(on_target_teleported)
 		target = v
 		if !target:
 			target_pos = start_pos
-		target.teleported.connect(on_target_teleported)
+		else:
+			if target.has_signal("teleported") and not target.teleported.is_connected(on_target_teleported):
+				target.teleported.connect(on_target_teleported)
 		update_process()
 @export var min_dist := 8
 @export var max_dist := 24
@@ -30,13 +35,19 @@ var target_pos
 
 func _ready() -> void:
 	parent = get_parent()
-	update_process()
 	start_pos = global_position
+	if not target and is_inside_tree():
+		var pl = get_tree().get_first_node_in_group("player")
+		if pl and pl is Node2D:
+			target = pl
+	update_process()
 
 
 func on_target_teleported():
-	parent.global_position = target.global_position
-	parent.teleported.emit()
+	if parent and target and is_instance_valid(target):
+		parent.global_position = target.global_position
+		if parent.has_signal("teleported"):
+			parent.teleported.emit()
 
 
 func _process(delta: float) -> void:
@@ -60,8 +71,11 @@ func go_to_pos(pos):
 
 
 func update_process():
+	if not parent and is_inside_tree():
+		parent = get_parent()
 	if active and (target != null or target_pos != null):
 		process_mode = Node.PROCESS_MODE_INHERIT
 	else:
-		parent.move_vector = Vector2.ZERO
+		if parent and "move_vector" in parent:
+			parent.move_vector = Vector2.ZERO
 		process_mode = Node.PROCESS_MODE_DISABLED

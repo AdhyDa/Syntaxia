@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6amk4f4yqobh"
-path="res://.godot/imported/MilkPot.png-8e8a168e38a53ca48cd81827a6addcfe.ctex"
+path="res://.godot/imported/GepyokanMahadaya.png-8322b692325980ec75e613e77e3e6375.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/potion/MilkPot.png"
-dest_files=["res://.godot/imported/MilkPot.png-8e8a168e38a53ca48cd81827a6addcfe.ctex"]
+source_file="res://content/potion/GepyokanMahadaya.png"
+dest_files=["res://.godot/imported/GepyokanMahadaya.png-8322b692325980ec75e613e77e3e6375.ctex"]
 
 [params]
 

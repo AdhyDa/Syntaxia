@@ -21,10 +21,16 @@ func _ready() -> void:
 
 
 func update_process():
+	if not parent and is_inside_tree():
+		parent = get_parent()
 	if active:
 		process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		process_mode = Node.PROCESS_MODE_DISABLED
+		if parent and "move_vector" in parent:
+			parent.move_vector = Vector2.ZERO
+		if parent and "velocity" in parent:
+			parent.velocity = Vector2.ZERO
 
 
 func _process(delta: float) -> void:

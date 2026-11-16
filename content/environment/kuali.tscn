@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b82bljy3dhpax"]
 
+[ext_resource type="Script" uid="uid://c6rry3ip36q8p" path="res://content/environment/kuali.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c6chl0altikll" path="res://content/environment/cauldron_spritesheet.png" id="1_wl4jt"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="3_font"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prv7k"]
 atlas = ExtResource("1_wl4jt")
@@ -71,9 +73,42 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kuali"]
+radius = 64.0
+
 [node name="Kuali" type="Area2D" unique_id=718830078]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706974935]
 sprite_frames = SubResource("SpriteFrames_ifisb")
-animation = &"kuali_proses"
+animation = &"kuali_idle"
 frame_progress = 0.6334563
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294810291]
+shape = SubResource("CircleShape2D_kuali")
+
+[node name="PromptLabel" type="Label" parent="." unique_id=892318491]
+z_index = 10
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -54.0
+offset_right = 60.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 1.1599997)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 14
+text = "[E] Racik Jamu"
+horizontal_alignment = 1
+vertical_alignment = 1

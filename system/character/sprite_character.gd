@@ -49,8 +49,13 @@ var current_image:= 0.0:
 
 
 func update_animation():
-	frame_coords.x = direction_to_frame(direction)
-	frame_coords.y = image_list[floor(current_image)]
+	var fx = direction_to_frame(direction)
+	frame_coords.x = fx if fx < hframes else 0
+	if vframes > 1 and image_list.size() > 0:
+		var fy = image_list[floor(current_image)]
+		frame_coords.y = fy if fy < vframes else 0
+	else:
+		frame_coords.y = 0
 
 
 func _process(delta: float) -> void:

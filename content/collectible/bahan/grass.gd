@@ -3,22 +3,14 @@
 extends Destroyable
 class_name Grass
 
-
-## ====================================================================
-## PENGATURAN TINGKAT KELANGKAAN (DROP RATE)
-## Kamu bisa mengubah angka bobot (weight / persentase) di bawah ini
-## langsung di script ini atau melalui panel Inspector Godot.
-## Semakin besar angkanya, semakin tinggi peluang drop item tersebut.
-## Total bobot saat ini = 100.0 (25 + 25 + 15 + 15 + 10 + 5 + 5).
-## ====================================================================
 @export var drop_rates: Dictionary = {
-	"air": 25.0,        # Common (25%)
-	"beras": 25.0,      # Common (25%)
-	"serai": 15.0,      # Uncommon (15%)
-	"gulamerah": 15.0,  # Uncommon (15%)
-	"jahe": 10.0,       # Rare (10%)
-	"asamjawa": 5.0,    # Very Rare (5%)
-	"kencur": 5.0       # Epic / Sangat Langka (5%)
+	"air": 25.0,
+	"jahe": 20.0,
+	"serai": 20.0,    
+	"kencur": 11.5,	
+	"beras": 11.5,  
+	"gulamerah": 6.0,
+	"asamjawa": 6.0  
 }
 
 ## Daftar scene prefab untuk masing-masing bahan

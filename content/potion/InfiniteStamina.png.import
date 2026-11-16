@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7tfl3jhjp00c"
-path="res://.godot/imported/UI_Resep Ramuan.png-3c6efd6f6f143776e4d940688c21c55a.ctex"
+uid="uid://muc05bvtlyd4"
+path="res://.godot/imported/InfiniteStamina.png-dc7d27a93ff78b6a2bee651fcf8edd1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/ui/UI_Resep Ramuan.png"
-dest_files=["res://.godot/imported/UI_Resep Ramuan.png-3c6efd6f6f143776e4d940688c21c55a.ctex"]
+source_file="res://content/potion/InfiniteStamina.png"
+dest_files=["res://.godot/imported/InfiniteStamina.png-dc7d27a93ff78b6a2bee651fcf8edd1f.ctex"]
 
 [params]
 

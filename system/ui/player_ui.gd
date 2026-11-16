@@ -12,6 +12,9 @@ const ITEM_TEXTURES: Dictionary = {
 	"asam_jawa": preload("res://content/collectible/bahan/asam_jawa.png"),
 	"kencur": preload("res://content/collectible/bahan/kencur.png"),
 	"grass": preload("res://content/collectible/bahan/grass.png"),
+	"wedangjahesereh": preload("res://content/potion/FireResistance.png"),
+	"beraskencur": preload("res://content/potion/InfiniteStamina.png"),
+	"gepyokan": preload("res://content/potion/GepyokanMahadaya.png"),
 }
 
 const UI_FONT = preload("res://content/menu/aset_menu/ThaleahFat.ttf")
@@ -23,9 +26,15 @@ const UI_FONT = preload("res://content/menu/aset_menu/ThaleahFat.ttf")
 
 
 func _ready() -> void:
-	# Set nilai awal saat game dimulai
-	update_gold(0)
-	update_exp(0, 100, 1)
+	# Set nilai awal saat game dimulai dari QuestManager
+	if is_instance_valid(QuestManager):
+		update_gold(QuestManager.current_gold)
+		update_exp(QuestManager.current_exp, QuestManager.get_max_exp_for_level(QuestManager.current_level), QuestManager.current_level)
+		QuestManager.gold_changed.connect(update_gold)
+		QuestManager.exp_changed.connect(update_exp)
+	else:
+		update_gold(0)
+		update_exp(0, 100, 1)
 	
 	# Hubungkan sinyal dari backend PlayerInventory
 	PlayerInventory.item_added.connect(_on_inventory_changed)

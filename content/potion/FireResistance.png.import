@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://muc05bvtlyd4"
-path="res://.godot/imported/Medipack.png-2c75a62af8308d4d9872d43468c18624.ctex"
+uid="uid://gp4gog56ojtf"
+path="res://.godot/imported/FireResistance.png-1534a179dbde8a4470b54664ce76b25f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/potion/Medipack.png"
-dest_files=["res://.godot/imported/Medipack.png-2c75a62af8308d4d9872d43468c18624.ctex"]
+source_file="res://content/potion/FireResistance.png"
+dest_files=["res://.godot/imported/FireResistance.png-1534a179dbde8a4470b54664ce76b25f.ctex"]
 
 [params]
 
