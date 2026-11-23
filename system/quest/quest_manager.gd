@@ -39,6 +39,17 @@ const ITEM_NAMES: Dictionary = {
 	"gepyokan": "Gepyokan"
 }
 
+## Data ekonomi Hardcore untuk 7 bahan herbal di Toko Mpok Sintaks
+const ITEM_PRICES: Dictionary = {
+	"air": {"buy": 6, "sell": 1},
+	"beras": {"buy": 6, "sell": 1},
+	"serai": {"buy": 9, "sell": 1},
+	"gulamerah": {"buy": 9, "sell": 1},
+	"jahe": {"buy": 12, "sell": 2},
+	"asamjawa": {"buy": 18, "sell": 3},
+	"kencur": {"buy": 18, "sell": 3}
+}
+
 const QUEST_DATABASE: Dictionary = {
 	1: {
 		"id": 1,
@@ -89,6 +100,11 @@ var active_quest_id: int = 0
 var quest_statuses: Dictionary = {}
 
 var current_gold: int = 0
+var gold: int:
+	get:
+		return current_gold
+	set(v):
+		current_gold = v
 var current_exp: int = 0
 var current_level: int = 1
 
@@ -144,6 +160,31 @@ func is_delivery_ready(quest_id: int) -> bool:
 
 
 ## ─────────────────────────────────────────────
+## TOKO MPOK SINTAKS — HELPER EKONOMI
+## ─────────────────────────────────────────────
+
+## Mengambil daftar ID bahan yang diperdagangkan di toko (7 bahan herbal)
+func get_shop_item_ids() -> Array[String]:
+	return ["air", "beras", "serai", "gulamerah", "jahe", "asamjawa", "kencur"]
+
+
+## Mengambil harga beli bahan (koin yang harus dibayar pemain)
+func get_item_buy_price(item_id: String) -> int:
+	var id = item_id.to_lower()
+	if ITEM_PRICES.has(id):
+		return ITEM_PRICES[id].get("buy", 0)
+	return 0
+
+
+## Mengambil harga jual bahan (koin yang didapat pemain saat menjual)
+func get_item_sell_price(item_id: String) -> int:
+	var id = item_id.to_lower()
+	if ITEM_PRICES.has(id):
+		return ITEM_PRICES[id].get("sell", 0)
+	return 0
+
+
+## ─────────────────────────────────────────────
 ## EXP & GOLD
 ## ─────────────────────────────────────────────
 
@@ -161,6 +202,17 @@ func add_gold(amount: int) -> void:
 		return
 	current_gold += amount
 	gold_changed.emit(current_gold)
+
+
+## Mengurangi koin/gold jika cukup. Kembalikan true jika berhasil, false jika koin kurang.
+func spend_gold(amount: int) -> bool:
+	if amount <= 0:
+		return true
+	if current_gold < amount:
+		return false
+	current_gold -= amount
+	gold_changed.emit(current_gold)
+	return true
 
 
 ## Menambahkan exp ke pemain dan menangani kenaikan level dinamis

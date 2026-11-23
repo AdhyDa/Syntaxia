@@ -1,0 +1,392 @@
+[gd_scene format=3 uid="uid://bxg84a2jklmop"]
+
+[ext_resource type="Script" uid="uid://dkifrt1r7slqj" path="res://system/ui/shop_ui.gd" id="1_shop"]
+[ext_resource type="Texture2D" uid="uid://c76fcvdd3228n" path="res://content/ui/shop_ui/shop_ui_right.png" id="3_right"]
+[ext_resource type="Texture2D" uid="uid://cbguueqn8npfe" path="res://content/ui/shop_ui/shop_name.png" id="4_name"]
+[ext_resource type="Texture2D" uid="uid://cu35ujuff8rt1" path="res://content/ui/shop_ui/tab_normal.png" id="5_tab_n"]
+[ext_resource type="Texture2D" uid="uid://dkwbnrxfj6tc2" path="res://content/ui/shop_ui/tab_hover.png" id="6_tab_h"]
+[ext_resource type="Texture2D" uid="uid://bkpa8fqgwgyu6" path="res://content/ui/shop_ui/tab_pressed.png" id="7_tab_p"]
+[ext_resource type="Texture2D" uid="uid://cphjbeurcoh8x" path="res://content/ui/shop_ui/button_normal.png" id="8_btn_n"]
+[ext_resource type="Texture2D" uid="uid://cmlylj6hdj2nh" path="res://content/ui/shop_ui/button_hover.png" id="9_btn_h"]
+[ext_resource type="Texture2D" uid="uid://b2hpwi63fj1bm" path="res://content/ui/shop_ui/button_pressed.png" id="10_btn_p"]
+[ext_resource type="Texture2D" uid="uid://bg8a6raavrvkm" path="res://content/collectible/coin/Coin2.png" id="11_coin"]
+[ext_resource type="Texture2D" uid="uid://d2fycqc5qhym5" path="res://content/ui/shop_ui/slot_selected.png" id="12_slot_sel"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="13_font"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coin"]
+atlas = ExtResource("11_coin")
+region = Rect2(0, 0, 10, 10)
+
+[node name="ShopUI" type="Control" unique_id=1409283711]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=987123456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="MainContainer" type="Control" parent="." unique_id=1029384756]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -720.0
+offset_top = -420.0
+offset_right = 720.0
+offset_bottom = 420.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopBar" type="Control" parent="MainContainer" unique_id=1122334455]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="TabsHBox" type="HBoxContainer" parent="MainContainer/TopBar" unique_id=-2061521730]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 38.0
+offset_top = -28.0
+offset_right = 378.0
+offset_bottom = 28.0
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="BtnTabBuy" type="TextureButton" parent="MainContainer/TopBar/TabsHBox" unique_id=-950410619]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_tab_n")
+texture_pressed = ExtResource("7_tab_p")
+texture_hover = ExtResource("6_tab_h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainContainer/TopBar/TabsHBox/BtnTabBuy" unique_id=160700492]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.1, 0.05, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 24
+text = "BUY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnTabSell" type="TextureButton" parent="MainContainer/TopBar/TabsHBox" unique_id=1271811603]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_tab_n")
+texture_pressed = ExtResource("7_tab_p")
+texture_hover = ExtResource("6_tab_h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainContainer/TopBar/TabsHBox/BtnTabSell" unique_id=-1912044692]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.1, 0.05, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 24
+text = "SELL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopNameBanner" type="TextureRect" parent="MainContainer/TopBar" unique_id=-800944581]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -170.0
+offset_right = 170.0
+offset_bottom = 76.0
+grow_horizontal = 2
+scale = Vector2(1.28, 1)
+texture = ExtResource("4_name")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShopNameLabel" type="Label" parent="MainContainer/TopBar/ShopNameBanner" unique_id=309066530]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_colors/font_outline_color = Color(0.93, 0.84, 0.7, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 28
+text = "Mpok Sintaks"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinRow" type="HBoxContainer" parent="MainContainer/TopBar" unique_id=1310177641]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -784.0
+offset_top = 33.0
+offset_right = -564.0
+offset_bottom = 81.0
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="MainContainer/TopBar/CoinRow" unique_id=1011121314]
+texture_filter = 1
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+texture = SubResource("AtlasTexture_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="MainContainer/TopBar/CoinRow" unique_id=1213141516]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 28
+text = "0 G"
+vertical_alignment = 1
+
+[node name="PanelsHBox" type="Control" parent="MainContainer" unique_id=185525276]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -750.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LeftPanel" type="TextureRect" parent="MainContainer/PanelsHBox" unique_id=1415161718]
+texture_filter = 1
+custom_minimum_size = Vector2(880, 740)
+layout_mode = 0
+offset_right = 896.0
+offset_bottom = 750.0
+size_flags_horizontal = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LeftMargin" type="MarginContainer" parent="MainContainer/PanelsHBox/LeftPanel" unique_id=1617181920]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 105.0
+offset_right = -50.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/PanelsHBox/LeftPanel/LeftMargin" unique_id=1718192021]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ItemGridContainer" type="GridContainer" parent="MainContainer/PanelsHBox/LeftPanel/LeftMargin/ScrollContainer" unique_id=1819202122]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 3
+
+[node name="RightPanel" type="TextureRect" parent="MainContainer/PanelsHBox" unique_id=1920212223]
+texture_filter = 1
+custom_minimum_size = Vector2(520, 740)
+layout_mode = 0
+offset_left = 920.0
+offset_right = 1440.0
+offset_bottom = 750.0
+texture = ExtResource("3_right")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectedItemHeaderLabel" type="Label" parent="MainContainer/PanelsHBox/RightPanel" unique_id=2021222324]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 157.0
+offset_right = 160.0
+offset_bottom = 207.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.24, 0.14, 0.08, 1)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 44
+text = "Air"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightMargin" type="MarginContainer" parent="MainContainer/PanelsHBox/RightPanel" unique_id=2122232425]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = 85.0
+offset_right = -60.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightVBox" type="Control" parent="MainContainer/PanelsHBox/RightPanel/RightMargin" unique_id=89451118]
+layout_mode = 2
+
+[node name="SlotCenter" type="CenterContainer" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox" unique_id=-1970714669]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_top = 179.0
+offset_right = 400.0
+offset_bottom = 339.0
+
+[node name="DetailSlotFrame" type="TextureRect" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/SlotCenter" unique_id=-1869704568]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("12_slot_sel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DetailItemIcon" type="TextureRect" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/SlotCenter" unique_id=-1768694467]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InfoVBox" type="Control" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox" unique_id=1961690891]
+anchors_preset = 0
+offset_top = 296.0
+offset_right = 400.0
+offset_bottom = 296.0
+
+[node name="DetailPriceLabel" type="Label" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/InfoVBox" unique_id=-1364654063]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 33.0
+offset_right = 400.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0.2, 0.45, 0.15, 1)
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 42
+text = "6"
+horizontal_alignment = 1
+
+[node name="ButtonsVBox" type="Control" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox" unique_id=2137068728]
+anchors_preset = 0
+offset_top = 363.0
+offset_right = 400.0
+offset_bottom = 363.0
+
+[node name="BtnAction" type="TextureButton" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/ButtonsVBox" unique_id=-1061623760]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 72)
+layout_mode = 0
+offset_left = 70.0
+offset_right = 330.0
+offset_bottom = 72.0
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_btn_n")
+texture_pressed = ExtResource("10_btn_p")
+texture_hover = ExtResource("9_btn_h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ActionLabel" type="Label" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/ButtonsVBox/BtnAction" unique_id=-960613659]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.1, 0.05, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 26
+text = "BUY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnBack" type="TextureButton" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/ButtonsVBox" unique_id=-859603558]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 72)
+layout_mode = 0
+offset_left = 70.0
+offset_top = 84.0
+offset_right = 330.0
+offset_bottom = 156.0
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_btn_n")
+texture_pressed = ExtResource("10_btn_p")
+texture_hover = ExtResource("9_btn_h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MainContainer/PanelsHBox/RightPanel/RightMargin/RightVBox/ButtonsVBox/BtnBack" unique_id=-758593457]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.18, 0.1, 0.05, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("13_font")
+theme_override_font_sizes/font_size = 26
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1

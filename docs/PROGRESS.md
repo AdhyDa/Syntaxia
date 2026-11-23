@@ -8,8 +8,8 @@ Dokumen ini mencatat seluruh arsitektur, histori implementasi dari awal, struktu
 ## 1. Konvensi Arsitektur Proyek
 
 Proyek ini memisahkan secara ketat antara **Sistem Inti** dan **Konten**:
-* `res://system/`: Logika dasar, abstract/base class, base scene, resource template, dan singleton manager.
-* `res://content/`: Varian konkret, prefab spesifik, aset visual, partikel, peta, dan data item turunan.
+* `res://system/`: Logika dasar, abstract/base class, base scene, resource template, singleton manager, sistem UI umum, dan quest engine.
+* `res://content/`: Varian konkret, prefab spesifik, aset visual, karakter, NPC, peta, dan data item turunan.
 
 ### Konvensi Layer Fisika (2D Physics Layers)
 * **Layer 1:** `Wall` (Dinding & batas fisik dunia)
@@ -24,8 +24,8 @@ Proyek ini memisahkan secara ketat antara **Sistem Inti** dan **Konten**:
 ### [Milestone 1] Fondasi Sistem Collectible & Migrasi Destroyable
 * **Tujuan Awal:** Menambahkan logika item collectible berbasis parent script dan scene destroyable.
 * **Tindakan yang Dilakukan:**
-  1. Memindahkan aset & scene `crate`, `grass`, `pot` dari `content/destroyable/` ke `content/collectible/bahan/` serta memperbarui referensi di `tileset.tres` dan file `.import`.
-  2. Membuat singleton autoload `PlayerInventory` di `res://system/inventory/player_inventory.gd` (didaftarkan di `project.godot`).
+  1. Memindahkan aset & scene `crate`, `grass`, `pot` dari `content/destroyable/` ke `content/collectible/bahan/` serta memperbarui referensi di `tileset.tres`.
+  2. Membuat singleton autoload `PlayerInventory` di `res://system/inventory/player_inventory.gd`.
   3. Membuat resource dasar `ResourceCollectible` (`system/collectible/resource_collectible.gd`).
   4. Membuat base scene dan script `Collectible` (`system/collectible/collectible.gd` & `.tscn`).
   5. Menambahkan kemampuan `spawn_drop()` dan properti `@export var drop_item_scene` pada parent `system/destroyable/destroyable.gd`.
@@ -52,8 +52,8 @@ Proyek ini memisahkan secara ketat antara **Sistem Inti** dan **Konten**:
      * Kuota rumput aktif diatur sebesar 80% dari total `Marker2D`.
      * Cooldown respawn 15 detik setelah item diambil atau kedaluwarsa.
      * Peluang 10% respawn di titik asal yang sama.
-     * Evaluasi kamera: Rumput **tidak boleh respawn** jika koordinatnya terlihat di viewport kamera pemain.
-  3. **Pemasangan di Map:** Menambahkan `GrassSpawner` lengkap dengan **10 titik `Marker2D`** di `content/map/map_village.tscn`.
+     * Evaluasi kamera: Rumput tidak boleh respawn jika koordinatnya terlihat di viewport kamera pemain.
+  3. **Pemasangan di Map:** Menambahkan `GrassSpawner` lengkap dengan 10 titik `Marker2D` di `content/map/map_village.tscn`.
 
 ### [Milestone 4] Penyempurnaan Mekanik Drop, Sesi Inventory, & HUD UI
 * **Tujuan:**
@@ -65,49 +65,92 @@ Proyek ini memisahkan secara ketat antara **Sistem Inti** dan **Konten**:
   2. `Collectible`: Ditambahkan fungsi `_spawn_scatter_and_bounce_fx()` (lompatan parabola 16–24 px dengan jeda pengambilan ~0.4 detik).
   3. `PlayerUi`: Ditambahkan `CollectibleContainer` (`HFlowContainer`) di `system/ui/player_ui.tscn` dan sinkronisasi ikon $14 \times 14$ px + jumlah bahan di `system/ui/player_ui.gd`.
 
+### [Milestone 5] Implementasi Penuh Level 1 (Quest 1: Pesanan Sang Pemula) & Grimoire UI
+* **Tujuan:** Mengimplementasikan siklus penuh peracikan jamu Level 1 berbasis kode (Fungsi vs Prosedur) dan interaksi penyerahan ke NPC Nara.
+* **Hasil:**
+  1. **NPC Nara:** Interaksi dialog menggunakan tombol E di desa (`nara_interaction.gd`, `nara_dialog_ui.tscn`). Memberikan quest "Wedang Jahe Sereh".
+  2. **Kuali Ruang Racik:** Interaksi kuali lapangan di Ruang Racik (`kuali.gd`, `kuali.tscn`) untuk membuka Grimoire UI.
+  3. **Dual-Layered Grimoire UI (`grimoire_ui.tscn`, `grimoire_ui.gd`):** Menggunakan aset `code_terminal_ui_wood`. Lapisan bawah `GhostCodeEdit` (bayangan teks permanen tanpa nomor baris) dan lapisan atas `PlayerCodeEdit` dengan sinkronisasi scroll permanen serta alignment horizontal berbasis lebar gutter.
+  4. **Educational RecipeParser Level 1 (`recipe_parser.gd`):**
+     * Memvalidasi `FUNGSI Ekstrak_Panas(Jahe, Sereh)` wajib memiliki `KEMBALIKAN` dan hasilnya ditampung ke variabel.
+     * Memvalidasi `PROSEDUR Buat_Wedang_Jahe()` (aksi void) wajib memanggil `Siapkan_Gelas()`, `Seduh_Air()`, dan `Campurkan(esensi)`.
+     * Menolak kode jika terdapat sintaks resep level lain (Quest-Lock).
+  5. **Integrasi Stok Tas:** Memotong 1 Jahe, 1 Sereh, 1 Air jika sukses, dan memberikan item jamu `wedangjahesereh.tres`.
+  6. **Siklus Delivery & Reward:** Pemain menyerahkan jamu ke Nara $\rightarrow$ menerima 10 Koin Perak dan 100 EXP (naik ke Level 2).
+
+### [Milestone 6] Generalisasi Sistem Quest, Akordeon List Quest, & Companion Follow
+* **Tujuan:** Menghilangkan seluruh hardcode quest agar sistem siap menampung Level 1, 2, 3 dst. secara modular, serta menghadirkan jendela List Quest akordeon interaktif.
+* **Hasil:**
+  1. **Pusat Database Quest (`QuestManager`):** Menyimpan `QUEST_DATABASE` untuk Quest 1, 2, 3, kamus nama ramah pengguna `ITEM_NAMES`, fungsi helper `get_item_display_name()`, rumus EXP dinamis ($100 + (\text{level}-1)\times 20$), serta fungsi `get_tracked_quest_ids()`.
+  2. **HUD Recent Quest Dinamis (`recent_quest.gd`):** Papan gantung dinamis dengan animasi ayun `Tween`, menampilkan live counter bahan dari tas, mendeteksi jamu siap antar, dan status selesai.
+  3. **Jendela List Quest Akordeon (`quest_detail_popup.gd` & `.tscn`):**
+     * Menggunakan latar kertas parchment `UI_QuestList.png` dan `ScrollContainer`.
+     * Menampilkan seluruh riwayat quest yang pernah diterima pemain (quest yang telah selesai tetap ada saat menerima quest baru).
+     * **Sistem Akordeon (Expand & Shrink):**
+       * Secara default **shrink** dengan indikator `[ ▶ ]`.
+       * Menampilkan keterangan status ringkas: `"Status: Quest X telah diselesaikan"` untuk quest selesai, dan `"Status: Belum selesai (Sedang Berjalan)"` untuk quest aktif.
+       * Ketika diklik, kartu mengembang (**Expand**) menjadi `[ ▼ ]` menampilkan rincian Klien, Cerita, Bahan (dengan centang hijau terpenuhi jika selesai), Status detail, dan Imbalan.
+       * Ketika diklik kembali, kartu menutup (**Shrink**) kembali ke `[ ▶ ]`.
+     * Jika belum ada quest, menampilkan pesan ramah tanpa tanda `"-"`.
+  4. **Player Freeze System:** Pemain membeku dan tidak bisa digerakkan dengan WASD selama berdialog dengan NPC, membuka Grimoire UI, atau membuka popup List Quest.
+  5. **Companion Follow (Book & Robot):** Memperbaiki perilaku pengikut di `map_village.tscn` agar mengikuti pemain dengan aman.
+  6. **Perbaikan Bounds Check Animasi:** Memperbaiki `sprite_character.gd` agar aman saat membaca sprite dengan `vframes = 1`.
+  7. **Automated Test Suite:** `tests/test_quest_runner.gd` & `.tscn` menguji seluruh integrasi secara otomatis di engine runtime (100% Passed).
+
 ---
 
 ## 3. Rincian Teknis Komponen & File Kunci
 
-### A. Backend Inventory (`system/inventory/player_inventory.gd`)
-* **Status:** Autoload Singleton (`PlayerInventory`).
-* **Kapasitas:** `MAX_STACK = 5` per `item_id`.
-* **Sifat Data:** Session-only (terhapus otomatis saat game ditutup).
+### A. Quest Manager (`system/quest/quest_manager.gd`)
+* **Status:** Autoload Singleton (`QuestManager`), `@tool`.
+* **Database Quest:** `QUEST_DATABASE: Dictionary` menyimpan data lengkap `id`, `title`, `short_name`, `client`, `client_short`, `story`, `required_items`, `result_item`, `reward_gold`, `reward_exp`, dan `ghost_template`.
 * **Fungsi Utama:**
-  * `add_item(item_id: String, amount: int = 1) -> bool` (me-return `false` jika stack penuh).
-  * `has_item(item_id: String) -> bool`
-  * `get_item_count(item_id: String) -> int`
-  * `remove_item(item_id: String, amount: int = 1) -> bool`
-  * `get_all_items() -> Dictionary`
-  * `clear()` dan `clear_saved_data()`
+  * `get_quest_data(quest_id: int) -> Dictionary`
+  * `get_active_quest_data() -> Dictionary`
+  * `get_tracked_quest_ids() -> Array[int]`
+  * `get_item_display_name(item_id: String) -> String`
+  * `is_delivery_ready(quest_id: int) -> bool`
+  * `get_max_exp_for_level(lvl: int) -> int`
+  * `add_exp(amount: int)` & `add_gold(amount: int)`
+  * `start_quest(quest_id: int)` & `complete_quest(quest_id: int)`
 
-### B. Base Collectible (`system/collectible/collectible.gd`)
-* **Node:** `Area2D` (collision_mask: Layer 5 / Player).
-* **Fitur:**
-  * `lifetime = 30.0`: Bertahan 30 detik di tanah.
-  * `blink_duration = 5.0`: Berkedip di 5 detik terakhir.
-  * `_spawn_scatter_and_bounce_fx()`: Melompat dan membal sebelum aktif diambil.
-  * `finished(success: bool)`: Memancarkan sinyal selesai (diambil atau waktu habis) ke Spawner.
+### B. List Quest Akordeon (`system/quest/quest_detail_popup.gd`)
+* **Node:** `Control` berlatar `UI_QuestList.png`.
+* **Scroll & List:** `%ScrollContainer` menampung `%QuestListContainer`.
+* **Perilaku Akordeon:**
+  * Tombol header quest memicu toggle `details_margin.visible = not details_margin.visible`.
+  * Indikator panah otomatis berganti antara `[ ▶ ]` (shrink) dan `[ ▼ ]` (expand).
+  * Menghapus child node dengan `remove_child(child)` sebelum `child.queue_free()` untuk mencegah bug duplikasi instan di frame yang sama.
 
-### C. Rumput / Grass (`content/collectible/bahan/grass.gd` & `.tscn`)
-* **Node:** `CharacterBody2D` (`Grass extends Destroyable`).
-* **Drop Rates Default:**
-  * `air`: 25.0 (Common)
-  * `beras`: 25.0 (Common)
-  * `serai`: 15.0 (Uncommon)
-  * `gulamerah`: 15.0 (Uncommon)
-  * `jahe`: 10.0 (Rare)
-  * `asamjawa`: 5.0 (Very Rare)
-  * `kencur`: 5.0 (Epic)
+### C. Grimoire UI (`system/ui/grimoire_ui.gd`)
+* **Node:** `Control` berlatar `code_terminal_ui_wood`.
+* **Komponen:**
+  * `%GhostCodeEdit`: `editable = false`, `gutters_draw_line_numbers = false`, offset posisi x mengikuti `player_code_edit.get_total_gutter_width()`.
+  * `%PlayerCodeEdit`: Input kode aktif pemain.
+  * Sinkronisasi scroll: `ghost_code_edit.scroll_vertical = player_code_edit.scroll_vertical`.
 
-### D. Spawner Rumput (`system/spawner/grass_spawner.gd`)
-* **Target Count:** `target_grass_count = roundi(markers.size() * spawn_ratio)` (80%).
-* **Cooldown:** `cooldown_seconds = 15.0`.
-* **Pengecekan Kamera:** `_is_position_visible_by_camera(world_pos: Vector2)` menggunakan `CameraGrid` / `Camera2D` dengan `screen_margin_buffer = 40.0`.
-
-### E. Player HUD UI (`system/ui/player_ui.gd` & `.tscn`)
-* **Node:** `%CollectibleContainer` (`HFlowContainer`) di bawah `%ExpBar`.
-* **Rendering:** Mendengarkan sinyal `item_added`, `item_removed`, `inventory_loaded`. Menampilkan ikon dari `ITEM_TEXTURES` dan teks jumlah font `ThaleahFat.ttf` ukuran 12.
+### [Milestone 9] Sistem Toko 2 Arah "Mpok Sintaks" (Beli & Jual Bahan Herbal)
+* **Tujuan:** Mengimplementasikan Shopping System 2 Arah (Beli & Jual) di peta desa dengan ekonomi Hardcore untuk 7 bahan rempah herbal.
+* **Hasil & Implementasi:**
+  1. **Ekonomi Hardcore & Helper (`system/quest/quest_manager.gd`):**
+     * Konstanta `ITEM_PRICES: Dictionary` untuk 7 bahan (air: 6/1, beras: 6/1, serai: 9/1, gulamerah: 9/1, jahe: 12/2, asamjawa: 18/3, kencur: 18/3).
+     * Helper: `get_shop_item_ids()`, `get_item_buy_price()`, `get_item_sell_price()`, `spend_gold()`, dan alias `var gold: int`.
+     * Proteksi jamu jadi (`wedangjahesereh`, `beraskencur`, `gepyokan`) tidak dijual di toko.
+  2. **Antarmuka ShopUI (`system/ui/shop_ui.tscn` & `shop_ui.gd`):**
+     * Menggunakan aset pixel art `res://content/ui/shop_ui/` (`TEXTURE_FILTER_NEAREST`).
+     * Tab BUY dan SELL dinamis (`tab_normal`, `tab_hover`, `tab_pressed`).
+     * Plakat toko `shop_name` ("Mpok Sintaks") dan live counter koin perak.
+     * GridContainer 3 kolom dengan 7 kartu (`shop_item_card`).
+     * Penguncian slot kosong (`slot_empty_locked`) khusus mode SELL jika stok tas 0.
+     * Panel kanan dengan detail item, stok tas (`Stok: X/5`), harga beli/jual, tombol BUY/SELL dinamis, dan tombol BACK.
+     * Instant cleanup kartu menggunakan `remove_child(child)` sebelum `child.queue_free()`.
+     * Pembekuan gerak pemain (`_freeze_player(true)`) saat toko terbuka dan unfreeze saat ditutup (BACK atau ESC).
+  3. **Node Toko di Desa (`content/map/map_village.tscn` & `content/environment/toko_interaction.gd`):**
+     * Area deteksi `TokoInteractionArea` (mask 2 & 5) di depan bangunan Toko.
+     * Label prompt mengambang `[E] Toko Mpok Sintaks` dengan kompensasi skala unscaled.
+     * Menangani interaksi tombol E untuk membuka `ShopUI` di CanvasLayer `Hud`.
+  4. **Pengujian Otomatis (`tests/test_shop_runner.gd` & `.tscn`):**
+     * 22/22 test assertion passed 100% di runtime game engine.
 
 ---
 
@@ -115,23 +158,28 @@ Proyek ini memisahkan secara ketat antara **Sistem Inti** dan **Konten**:
 
 | Ingin Mengubah Apa? | File yang Diedit | Baris / Parameter |
 |---|---|---|
-| **Persentase Drop Rate Bahan** | `content/collectible/bahan/grass.gd` | `@export var drop_rates` (Baris 15–25) atau via Inspector `grass.tscn` |
-| **Batas Maksimal Stack Item** | `system/inventory/player_inventory.gd` | `const MAX_STACK: int = 5` (Baris 8) |
-| **Waktu Cooldown Respawn Rumput** | `system/spawner/grass_spawner.gd` | `@export var cooldown_seconds: float = 15.0` (Baris 8) |
-| **Persentase Rumput Aktif di Map** | `system/spawner/grass_spawner.gd` | `@export var spawn_ratio: float = 0.8` (Baris 11) |
-| **Peluang Respawn di Titik Sama** | `system/spawner/grass_spawner.gd` | `@export var same_spot_chance: float = 0.1` (Baris 14) |
-| **Durasi Item di Tanah Sebelum Hilang** | `system/collectible/collectible.gd` | `@export var lifetime: float = 30.0` (Baris 9) |
-| **Jarak Lemparan Item Saat Pecah** | `system/collectible/collectible.gd` | `var scatter_dist: float = randf_range(16.0, 24.0)` (Baris 54) |
-| **Ukuran Ikon Item di HUD Layar** | `system/ui/player_ui.gd` | `icon_rect.custom_minimum_size = Vector2(14, 14)` (Baris 78) |
+| **Data Quest & Resep Baru (Quest 2, 3)** | `system/quest/quest_manager.gd` | `const QUEST_DATABASE: Dictionary` |
+| **Harga Beli & Jual Bahan di Toko** | `system/quest/quest_manager.gd` | `const ITEM_PRICES: Dictionary` |
+| **Kamus Nama Display Bahan** | `system/quest/quest_manager.gd` | `const ITEM_NAMES: Dictionary` |
+| **Rumus Kenaikan EXP per Level** | `system/quest/quest_manager.gd` | `func get_max_exp_for_level(lvl: int)` |
+| **Papan Gantung Recent Quest** | `recent_quest.gd` | `func update_quest_display()` |
+| **Tampilan Akordeon List Quest** | `system/quest/quest_detail_popup.gd` | `func _create_quest_card(q_id: int)` |
+| **Antarmuka & Transaksi Toko** | `system/ui/shop_ui.gd` | `system/ui/shop_ui.tscn` & `.gd` |
+| **Pemicu Interaksi Toko di Map** | `content/environment/toko_interaction.gd` | `open_shop()`, `_ready()` |
+| **Aturan Validasi Parser Kode** | `system/quest/recipe_parser.gd` | `func _validate_level_1(code: String)` |
+| **Persentase Drop Rate Bahan** | `content/collectible/bahan/grass.gd` | `@export var drop_rates` |
+| **Batas Maksimal Stack Item** | `system/inventory/player_inventory.gd` | `const MAX_STACK: int = 5` |
+| **Waktu Cooldown Respawn Rumput** | `system/spawner/grass_spawner.gd` | `@export var cooldown_seconds: float = 15.0` |
 
 ---
 
 ## 5. Rencana Fitur Lanjutan (Backlog / Roadmap)
 
-Fitur-fitur ini telah dibahas dengan pengguna namun **belum dikerjakan** (tunggu instruksi pengguna selanjutnya):
-1. **Sistem Peracikan Jamu / Alkimia (Crafting System):**
-   * Memanfaatkan bahan yang tersimpan di `PlayerInventory` untuk diracik di `kuali.tscn` berdasarkan `recipe_scroll.gd` dan target misi `recent_quest.gd`.
-2. **Sistem Pembelian Bahan Menggunakan Koin (Shop System):**
-   * NPC Toko yang memungkinkan pembelian bahan herbal langsung menggunakan `Gold` pemain.
-3. **Floating Text / Popup Toast:**
-   * Menampilkan teks melayang kecil (misal: `"+1 Jahe"` atau `"Bahan Penuh!"`) saat pemain mencoba mengambil item.
+1. **Pembuatan NPC Bara & Konten Level 2 (Beras Kencur):**
+   * Menempatkan NPC Bara di area desa dan memperluas `RecipeParser` untuk konsep perulangan `ULANGI 3 KALI`.
+2. **Pembuatan NPC Mbah Node & Konten Level 3 (Gepyokan):**
+   * Menempatkan NPC Mbah Node dan mengaktifkan peracikan jamu tolak bala.
+3. **[SELESAI] Sistem Toko & Pembelian dengan Koin (Toko Mpok Sintaks):**
+   * Sistem transaksi 2 arah (Beli & Jual) bahan herbal dengan harga hardcore economy, slot locking, dan UI pixel art lengkap.
+4. **Floating Toast Notification:**
+   * Menampilkan teks melayang kecil (misal: `"+1 Jahe"`, `"+10 Koin"`) di atas kepala pemain.

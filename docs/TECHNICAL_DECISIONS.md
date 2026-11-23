@@ -7,7 +7,7 @@ Dokumen ini mencatat seluruh standar teknis, arsitektur perangkat lunak, tumpuka
 ## 1. Teknologi & Versi
 
 * **Game Engine:** Godot Engine 4.7.2-stable (Forward+ Renderer / 2D Snap to Pixel aktif)
-* **Bahasa Pemrograman:** GDScript 2.0 (dengan Static Type Hints)
+* **Bahasa Pemrograman:** GDScript 2.0 (dengan Static Type Hints & Anotasi `@tool` untuk manajer data)
 * **Viewport Resolution:** $1920 \times 1080$ (Mode `viewport`, VSync dinonaktifkan di config)
 * **Pixel Density HUD:** Skala kanvas HUD `Vector2(4, 4)` dengan skala komponen turunan disesuaikan (~0.59x pada `PlayerUi`).
 * **Plugins / Addons:** `res://addons/godot_ai/` (AI Assistant Bridge Runtime).
@@ -22,16 +22,16 @@ Syntaxia/
 ├── docs/                     # Dokumentasi teknis & handover proyek
 ├── addons/                   # Plugin internal (godot_ai runtime)
 ├── audio/                    # Musik BGM (ogg/mp3) dan SFX
-│   └── music/
 ├── content/                  # Implementasi konkret & varian game
 │   ├── behavior/             # Perilaku AI musuh/NPC (follow, follow_path)
-│   ├── character/            # Karakter konkret (samurai_green, ninja_blue, pig, samurai_blue)
+│   ├── character/            # Karakter konkret (player, Nara NPC, robot, book)
 │   ├── collectible/          # Item bahan & koin konkret
 │   │   ├── bahan/            # Rempah herbal (jahe, serai, air, kencur, beras, gulamerah, asamjawa)
 │   │   └── coin/             # Koin gold
-│   ├── environment/          # Objek lingkungan (kuali, dekorasi)
+│   ├── environment/          # Objek lingkungan (kuali meja racik, teleporter, dekorasi)
 │   ├── map/                  # Tilemap, tileset, peta desa (map_village.tscn)
 │   ├── menu/                 # Title screen, UI menu, aset tombol
+│   ├── potion/               # Resource & ikon jamu (wedangjahesereh, beraskencur, gepyokan)
 │   └── team/                 # Resource tim damage (player_team.tres, npc_team.tres)
 ├── system/                   # Logika inti, arsitektur dasar, dan singleton
 │   ├── behavior/             # Kelas dasar AI behaviour
@@ -46,12 +46,14 @@ Syntaxia/
 │   ├── inventory/            # PlayerInventory Autoload Singleton
 │   ├── map/                  # Map base scene & controller
 │   ├── particle/             # Particle system wrapper
+│   ├── quest/                # QuestManager Autoload, RecipeParser, QuestDetailPopup
 │   ├── spawner/              # GrassSpawner system
 │   ├── stat/                 # ResourceStat, ResourceLife
 │   ├── teleporter/           # Teleporter system
 │   ├── transition/           # Fade transition
-│   ├── ui/                   # ReceptacleBar, PlayerUi, theme
+│   ├── ui/                   # ReceptacleBar, PlayerUi, GrimoireUI, theme
 │   └── weapon/               # Weapon controller & ResourceWeapon
+├── tests/                    # Automated runtime test runner & suites
 └── project.godot             # Konfigurasi engine & autoload
 ```
 
@@ -59,81 +61,93 @@ Syntaxia/
 
 ## 3. Database & Penyimpanan Data
 
-### Model Penyimpanan: Session-Based Singleton Memory
-* **Lokasi File:** `user://player_inventory.json` (hanya digunakan selama runtime sesi jika diperlukan, dan dibersihkan saat sesi berakhir).
-* **Manajer Data:** Autoload `PlayerInventory` (`res://system/inventory/player_inventory.gd`).
-* **Format Data:**
-  ```json
-  {
-    "jahe": 3,
-    "air": 5,
-    "serai": 1
-  }
-  ```
-* **Keputusan Teknis (Session-Only):**
-  * Sesuai permintaan pengguna, data inventory **tidak bersifat permanen lintas sesi**.
-  * Saat `_notification(NOTIFICATION_WM_CLOSE_REQUEST)` dan saat inisialisasi game `_ready()`, file penyimpanan dihapus dengan `DirAccess.remove_absolute(SAVE_PATH)` dan memori `items.clear()` dieksekusi.
+### A. Autoload Singletons
+1. **`PlayerInventory` (`res://system/inventory/player_inventory.gd`):**
+   * Mengelola kuantitas bahan rempah herbal dan potion di tas pemain.
+   * Session-based (dibersihkan saat game ditutup dan saat `_ready()`).
+   * Batas maksimal per bahan: `MAX_STACK = 5`.
+2. **`QuestManager` (`res://system/quest/quest_manager.gd`):**
+   * Singleton bertanda `@tool` untuk mengelola siklus hidup quest, level pemain, exp, dan koin perak.
+   * Memuat dictionary data terpusat `QUEST_DATABASE: Dictionary`.
+
+### B. Struktur Data `QUEST_DATABASE`
+```gdscript
+const QUEST_DATABASE: Dictionary = {
+    1: {
+        "id": 1,
+        "title": "Quest 1: Pesanan Sang Pemula",
+        "short_name": "Wedang Jahe",
+        "client": "Nara (Penyihir Pemula yang Kedinginan)",
+        "client_short": "Nara",
+        "story": "...",
+        "required_items": {"jahe": 1, "serai": 1, "air": 1},
+        "result_item": "wedangjahesereh",
+        "result_item_name": "Wedang Jahe Sereh",
+        "reward_gold": 10,
+        "reward_exp": 100,
+        "ghost_template": "FUNGSI Ekstrak_Panas(Jahe, Sereh)\n    KEMBALIKAN Esensi_Hangat\nAKHIR_FUNGSI\n\nPROSEDUR Buat_Wedang_Jahe()\n    Siapkan_Gelas()\n    Seduh_Air()\n    esensi = Ekstrak_Panas(Jahe, Sereh)\n    Campurkan(esensi)\nAKHIR_PROSEDUR"
+    },
+    ...
+}
+```
 
 ---
 
-## 4. Komponen Kunci & Pola Arsitektur (Components & Patterns)
+## 4. Keputusan Arsitektur Kunci (Key Architectural Decisions)
 
-### A. Pola Pewarisan Scene & Script (Inherited Scenes)
-* **Prinsip:** Logika umum selalu berada di `system/`, sedangkan instance di `content/` hanya mengonfigurasi properti via `@export`.
-* **Contoh:**
-  * `Destroyable` (`system/destroyable/destroyable.gd`) $\rightarrow$ diwarisi oleh `Grass` (`content/collectible/bahan/grass.gd`).
-  * `Collectible` (`system/collectible/collectible.gd`) $\rightarrow$ diwarisi oleh `jahebahan.tscn`, `airbahan.tscn`, dll.
+### A. Dual-Layered Permanent Ghost-Text (Grimoire UI)
+* **Masalah:** Properti bawaan `placeholder_text` pada `CodeEdit` di Godot 4 langsung menghilang saat pemain mulai mengetik karakter pertama.
+* **Solusi Arsitektur:** Menumpuk dua node `CodeEdit` identik di atas aset bingkai kayu `code_terminal_ui_wood`:
+  1. `GhostCodeEdit` (Layer Bawah): `editable = false`, `mouse_filter = MOUSE_FILTER_IGNORE`, font coklat transparan pudar `Color(0.45, 0.35, 0.25, 0.42)`. Nomor baris dimatikan (`gutters_draw_line_numbers = false`).
+  2. `PlayerCodeEdit` (Layer Atas): `editable = true`, nomor baris aktif.
+  3. **Penjajaran Horizontal (Gutter Alignment):** Posisi horizontal `GhostCodeEdit` digeser ke kanan sebesar `player_code_edit.get_total_gutter_width()` sehingga teks bayangan berada tepat di bawah teks ketikan pemain tanpa tergeser oleh nomor baris.
+  4. **Sinkronisasi Scroll:** Di dalam `_process()`, nilai `scroll_vertical` dan `scroll_horizontal` pada `GhostCodeEdit` selalu disamakan dengan `PlayerCodeEdit`.
 
-### B. Decoupled Combat System (`DamageArea` & `Hitbox`)
-* `DamageArea` (Area2D, bitmask `HITBOX_MASK = 3`): Mengirimkan damage saat mengenai area musuh.
-* `Hitbox` (Area2D, layer `HITBOX_LAYER = 3`): Menerima sinyal damage dan meneruskannya ke `ResourceLife`.
-* **Sistem Tim (`ResourceDamageTeam`):** Menentukan apakah target adalah sekutu (`is_ally`), musuh, atau friendly-fire.
+### B. Sistem Akordeon (Collapsible/Accordion) pada List Quest
+* **Masalah:** Pemain membutuhkan akses riwayat quest yang sudah diselesaikan tanpa menutupi quest baru yang sedang aktif, serta membutuhkan daftar yang rapi jika quest bertambah banyak.
+* **Solusi Arsitektur:**
+  1. Menggunakan `ScrollContainer` berlatar `UI_QuestList.png`.
+  2. Fungsi `QuestManager.get_tracked_quest_ids()` mengambil semua ID quest yang pernah diambil (`IN_PROGRESS`, `READY_TO_DELIVER`, `COMPLETED`).
+  3. Setiap quest dirender sebagai kartu terpisah:
+     * **Bilah Header (Clickable):** Menampilkan judul dan ringkasan status (`"Status: Quest X telah diselesaikan"` atau `"Status: Belum selesai (Sedang Berjalan)"`) dengan indikator panah `[ ▶ ]`.
+     * **Panel Rincian:** Secara default berstatus **Shrink (`visible = false`)**.
+     * **Interaksi Toggle:** Mengklik bilah header membuka (**Expand**, `[ ▼ ]`) atau menutup (**Shrink**, `[ ▶ ]`) panel rincian secara independen untuk tiap quest.
 
-### C. Kamera Sel Grid (`CameraGrid`)
-* Mengadopsi pergerakan kamera gaya The Legend of Zelda 2D.
-* Ukuran sel grid default: `grid_size = Vector2(320, 176)`.
-* Ketika pemain bergerak keluar dari batas sel, kamera melakukan animasi `Tween` halus ke sel koordinat baru (`cell_target`).
-* Kamera secara otomatis didaftarkan ke grup `"camera"`.
-
-### D. Sistem Deteksi Kamera Luar Layar (`_is_position_visible_by_camera`)
-* `GrassSpawner` mengambil instance kamera dari grup `"camera"`.
-* Bounding box dihitung dari koordinat kamera $\pm$ setengah ukuran grid ditambah margin keamanan 40 pixel:
+### C. Pembekuan Gerakan Pemain (Player Freeze Mechanism)
+* **Masalah:** Saat dialog NPC, popup list quest, atau meja racik Grimoire terbuka, tombol pergerakan (WASD) tetap menggerakkan karakter pemain di latar belakang.
+* **Solusi Arsitektur:** Fungsi terpusat `_freeze_player(freeze: bool)` diimplementasikan pada seluruh modul dialog dan modal UI:
   ```gdscript
-  var half_size = (cam.grid_size / 2.0) + Vector2(screen_margin_buffer, screen_margin_buffer)
-  var screen_rect = Rect2(cam.global_position - half_size, half_size * 2.0)
-  return screen_rect.has_point(pos)
+  func _freeze_player(freeze: bool) -> void:
+      for node in get_tree().get_nodes_in_group("player"):
+          if "move_vector" in node:
+              node.move_vector = Vector2.ZERO
+          if "velocity" in node:
+              node.velocity = Vector2.ZERO
+          for child in node.get_children():
+              if child is HumanController or child.name == "HumanController":
+                  child.active = not freeze
   ```
-* Jika sebuah titik `Marker2D` masuk dalam `screen_rect`, rumput dilarang respawn di titik tersebut guna mencegah efek rumput pop-in mendadak di pandangan pemain.
+
+### D. Companion Follow Target Reference (Opsi A)
+* Node companion (`robot` dan `book`) di `map_village.tscn` menggunakan script `BehaviorFollow` dengan properti target diarahkan langsung ke `NodePath("../../player")`.
+* Pengamanan tambahan dipasang untuk mencegah crash jika terjadi perpindahan scene atau teleportasi map.
+
+### E. Rumus EXP dan Leveling Dinamis
+* **Formula Max EXP:** $\text{Max EXP}(\text{Level}) = 100 + (\text{Level} - 1) \times 20$.
+  * Naik Level 1 $\rightarrow$ Level 2: Butuh 100 EXP.
+  * Naik Level 2 $\rightarrow$ Level 3: Butuh 120 EXP.
+  * Naik Level 3 $\rightarrow$ Level 4: Butuh 140 EXP.
+* **Akumulasi Surplus:** Jika pemain mendapatkan EXP melebihi Max EXP saat ini, kelebihan EXP disimpan dan diteruskan ke level berikutnya secara otomatis.
 
 ---
 
-## 5. Keputusan Teknis yang Telah Disepakati (Agreed Decisions & Rationales)
+## 5. Ringkasan Keputusan Teknis yang Telah Disepakati
 
 | Keputusan Teknis | Alasan / Rationale |
 |---|---|
-| **Penamaan Scene Tanpa Karakter Garis Bawah (`_`)** | Permintaan eksplisit pengguna agar seluruh scene bahan baru konsisten dan bersih dari karakter `_` (contoh: `gulamerah.tscn`, `seraibahan.tscn`, `asamjawa.tscn`). File PNG asli tetap dipertahankan nama aslinya untuk menghindari rusaknya UID import. |
-| **Pemisahan File `.tres` dan `.tscn` per Bahan** | Memisahkan data resource (`ResourceCollectible`) dari tampilan visual (`Collectible` scene) agar data bahan bisa digunakan ulang oleh UI toko, inventaris, dan resep tanpa perlu me-load scene fisik 2D. |
-| **Rumput Hancur Hanya Saat Disentuh (Bukan Senjata)** | Permintaan game design: rumput dipanen dengan cara diinjak secara alami saat bereksplorasi, bukan ditebas dengan senjata tempur. Dibuat area khusus `PlayerTouchArea` di Layer 5. |
-| **Jeda Pengambilan Item & Parabola Bounce** | Mencegah item langsung masuk inventory di milidetik yang sama saat pemain menginjak rumput. Item melompat sejauh 16–24 px dan baru aktif diambil setelah mendarat. |
-| **Sistem Titik Spawn Berbasis Marker2D** | Sesuai preferensi level design pengguna, titik spawn rumput ditentukan secara presisi menggunakan kumpulan node `Marker2D` dengan kuota 80% rumput aktif dan rotasi titik kosong. |
-| **Maksimal Stack 5 Buah per Item** | Memberikan batasan inventaris yang seimbang agar pemain terdorong untuk mengolah/meracik bahan ke kuali daripada menimbun tanpa batas. |
-| **Durasi 30 Detik Item di Tanah** | Mencegah penumpukan objek tak terpakai di map yang dapat menurunkan performa. Jika diabaikan, item menghilang dan memicu respawn rumput baru setelah 15 detik. |
-
----
-
-## 6. Standar Penulisan Kode (Coding Guidelines)
-
-* **Penamaan File & Identitas:**
-  * File GDScript: `snake_case.gd`.
-  * ClassName: `PascalCase` (contoh: `class_name Collectible`).
-  * File Scene Bahan Khusus: `nama_tanpa_garis_bawah.tscn` (contoh: `jahebahan.tscn`, `gulamerah.tscn`).
-* **Static Typing:** Selalu sertakan tipe data pada variabel dan return type fungsi:
-  ```gdscript
-  func add_item(item_id: String, amount: int = 1) -> bool:
-  var count: int = 0
-  ```
-* **Event-Driven Communication:**
-  * Gunakan sinyal (`signal`) untuk komunikasi dari anak ke induk atau antar-sistem (`item_added`, `finished`, `killed`).
-  * Jangan memanggil `get_parent().get_parent()` secara bertingkat; gunakan referensi eksplisit atau sinyal.
-* **Penghapusan Node:**
-  * Selalu gunakan `queue_free()` atau `call_deferred("queue_free")` saat menghapus node dari scene tree untuk menghindari bentrok memori fisika.
+| **Data-Driven Quest System (`QUEST_DATABASE`)** | Memisahkan data quest dari logika UI sehingga penambahan Level 2, 3, dst. tidak memerlukan pengubahan kode tampilan. |
+| **Bilah Akordeon Default Shrink** | Memastikan jendela daftar pesanan tetap ringkas, bersih, dan mudah dibaca oleh pemain meskipun telah menyelesaikan banyak quest. |
+| **Kamus Nama Display Bahan (`ITEM_NAMES`)** | Menjembatani ID teknis bahan (seperti `serai`, `gulamerah`, `wedangjahesereh`) menjadi nama ramah pengguna (seperti `"Sereh"`, `"Gula Merah"`, `"Wedang Jahe Sereh"`). |
+| **Pembersihan Instan Sebelum Re-render (`remove_child`)** | Menghindari bug penumpukan kartu pada frame yang sama akibat penundaan penghapusan oleh `queue_free()`. |
+| **Tanda Centang Terpenuhi pada Bahan Quest Selesai** | Memberikan feedback visual yang jelas bahwa bahan pada quest lama sudah sukses dipenuhi tanpa membingungkan stok tas pemain saat ini. |
+| **Bounds-Check Animasi `vframes` / `hframes`** | Mencegah engine Godot mengeluarkan error index out of bounds saat sprite sheet karakter hanya memiliki 1 baris. |
