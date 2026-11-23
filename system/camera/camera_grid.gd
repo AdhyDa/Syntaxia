@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		return
 	if !target:
 		set_process(false)
-	go_to_world_position(target.global_position)
+	global_position = target.global_position
 
 
 func get_world_position()->Vector2:

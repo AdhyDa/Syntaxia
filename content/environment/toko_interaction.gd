@@ -47,10 +47,22 @@ func _ready() -> void:
 	prompt_label = Label.new()
 	prompt_label.text = "[E] Toko Mpok Sintaks"
 	prompt_label.add_theme_font_override("font", UI_FONT)
-	prompt_label.add_theme_font_size_override("font_size", 8)
+
+	#Gunakan ukuran font kelipatan pixel-art (misal 16 atau 24) agar huruf tidak gepeng
+	prompt_label.add_theme_font_size_override("font_size", 16) 
+
+	#Warna teks & outline yang proporsional
 	prompt_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
-	prompt_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
-	prompt_label.add_theme_constant_override("outline_size", 1)
+	prompt_label.add_theme_color_override("font_outline_color", Color(0.05, 0.05, 0.05, 1))
+	prompt_label.add_theme_constant_override("outline_size", 3)
+
+	#Kecilkan skala node jika ukuran 16 terasa terlalu besar di dunia game
+	prompt_label.scale = Vector2(0.5, 0.5)
+
+	#Pastikan filter tekstur font tajam (Nearest) & berada di layer paling atas
+	prompt_label.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	prompt_label.z_index = 10
+
 	prompt_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	prompt_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
