@@ -27,6 +27,7 @@ const UI_FONT = preload("res://content/menu/aset_menu/ThaleahFat.ttf")
 
 func _ready() -> void:
 	# Set nilai awal saat game dimulai dari QuestManager
+	_current_ui_level = QuestManager.current_level
 	if is_instance_valid(QuestManager):
 		update_gold(QuestManager.current_gold)
 		update_exp(QuestManager.current_exp, QuestManager.get_max_exp_for_level(QuestManager.current_level), QuestManager.current_level)
@@ -54,10 +55,38 @@ func update_gold(amount: int) -> void:
 
 
 # Fungsi untuk mengubah Bar EXP dan Level
+var _exp_tween: Tween = null
+var _current_ui_level: int = 1
+
 func update_exp(current_exp: int, max_exp: int, level: int = 1) -> void:
-	exp_bar.max_value = max_exp
-	exp_bar.value = current_exp
-	exp_label.text = "LV. %d" % level
+	if _exp_tween and _exp_tween.is_valid():
+		_exp_tween.kill()
+	_exp_tween = create_tween()
+
+	# Jika Naik Level
+	if level > _current_ui_level:
+		# 1. Bar lama terisi penuh sampai 100%
+		_exp_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		_exp_tween.tween_property(exp_bar, "value", exp_bar.max_value, 0.4)
+		
+		# 2. Ganti angka level & reset bar ke 0
+		_exp_tween.tween_callback(func():
+			_current_ui_level = level
+			exp_label.text = "LV. %d" % level
+			exp_bar.max_value = max_exp
+			exp_bar.value = 0
+		)
+		
+		# 3. Bar baru terisi dari 0 sampai sisa EXP
+		if current_exp > 0:
+			_exp_tween.tween_property(exp_bar, "value", float(current_exp), 0.5)
+	else:
+		# Jika tambah EXP biasa (tanpa naik level)
+		_current_ui_level = level
+		exp_bar.max_value = max_exp
+		exp_label.text = "LV. %d" % level
+		_exp_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		_exp_tween.tween_property(exp_bar, "value", float(current_exp), 0.6)
 
 
 ## Memperbarui tampilan item collectible yang telah dikumpulkan

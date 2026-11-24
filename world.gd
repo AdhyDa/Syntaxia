@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@export var main_bgm: AudioStream = preload("res://content/environment/Heartbeat, Heartbreak (Instrumental) - CG Instrumentals.mp3")
 @export var starting_map:PackedScene
 @export var stating_weapon:ResourceWeapon
 
@@ -24,7 +24,9 @@ var map:Map
 func _ready():
 	generate_map(starting_map)
 	camera_grid.animation_finished.connect(on_camera_animation_finished)
-
+	
+	if main_bgm:
+			music.play_music(main_bgm)
 
 func on_camera_animation_finished():
 	pivot.position = camera_grid.global_position
@@ -49,10 +51,10 @@ func apply_environment(resource_environment:ResourceEnvironment):
 	fog.active = ResourceEnvironment.Meteo.FOG in resource_environment.meteo_list
 	raylight.emitting = ResourceEnvironment.Meteo.RAY in resource_environment.meteo_list
 	# MUSIC
-	if resource_environment.music:
-		music.change_music(resource_environment.music)
-	else:
-		music.stop_music()
+	 #if resource_environment.music:
+		#music.change_music(resource_environment.music)
+	 #else:
+		#music.stop_music()
 	
 	# GRADIENT
 	color_correction.gradient = resource_environment.color_gradient

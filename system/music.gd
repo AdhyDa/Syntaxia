@@ -9,6 +9,15 @@ const VOLUME_MORMAL = 0
 var tween:Tween
 
 
+func _ready() -> void:
+	finished.connect(_on_finished)
+
+
+func _on_finished() -> void:
+	if stream:
+		play()
+
+
 func change_music(audio_stream:AudioStream):
 	if stream:
 		if stream == audio_stream:
