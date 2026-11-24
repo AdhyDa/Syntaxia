@@ -94,3 +94,12 @@ func test_recipe_parser_quest_lock_and_validation() -> void:
 		assert_true("Bahan di tas kurang" in res_valid.message, "Harus gagal karena bahan tas kurang, bukan syntax error: " + res_valid.message)
 	else:
 		assert_true(res_valid.success, "Sintaks template quest 1 valid")
+
+	# Validasi Quest 2
+	var q2 = qm.get_quest_data(2)
+	var valid_code_q2 = q2["ghost_template"]
+	var res_valid_q2 = RecipeParser._validate_level_2(valid_code_q2)
+	if not res_valid_q2.success:
+		assert_true("Bahan di tas kurang" in res_valid_q2.message, "Harus gagal karena bahan tas kurang, bukan syntax error: " + res_valid_q2.message)
+	else:
+		assert_true(res_valid_q2.success, "Sintaks template quest 2 valid")

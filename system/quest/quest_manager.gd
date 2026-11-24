@@ -67,16 +67,16 @@ const QUEST_DATABASE: Dictionary = {
 	},
 	2: {
 		"id": 2,
-		"title": "Quest 2: Pemulih Tenaga Bara",
+		"title": "Quest 2: Pemulih Tenaga Narji",
 		"short_name": "Beras Kencur",
-		"client": "Bara (Pejuang yang Kelelahan)",
-		"client_short": "Bara",
-		"story": "Bara kelelahan setelah latihan tempur seharian. Racikkan Beras Kencur agar tenaganya pulih kembali!",
-		"required_items": {"kencur": 1, "beras": 1, "air": 1},
+		"client": "Narji (Calon Ksatria Syntaxia)",
+		"client_short": "Narji",
+		"story": "Narji kelelahan setelah latihan tempur seharian. Racikkan Beras Kencur agar tenaganya pulih kembali!",
+		"required_items": {"kencur": 2, "beras": 2, "air": 3},
 		"result_item": "beraskencur",
 		"result_item_name": "Beras Kencur",
-		"reward_gold": 20,
-		"reward_exp": 120,
+		"reward_gold": 25,
+		"reward_exp": 100,
 		"ghost_template": "FUNGSI Ekstrak_Stamina(Kencur, Beras)\n    KEMBALIKAN Esensi_Vitalitas\nAKHIR_FUNGSI\n\nPROSEDUR Buat_Beras_Kencur()\n    Siapkan_Gelas()\n    Seduh_Air()\n    esensi = Ekstrak_Stamina(Kencur, Beras)\n    Campurkan(esensi)\nAKHIR_PROSEDUR"
 	},
 	3: {
@@ -235,8 +235,18 @@ func add_exp(amount: int) -> void:
 ## QUEST LIFECYCLE
 ## ─────────────────────────────────────────────
 
+## Cek apakah quest boleh diambil (Quest berurutan: N butuh N-1 COMPLETED)
+func can_start_quest(quest_id: int) -> bool:
+	if quest_id <= 1:
+		return true
+	return get_quest_status(quest_id - 1) == QuestStatus.COMPLETED
+
+
 ## Memulai quest tertentu
 func start_quest(quest_id: int) -> void:
+	if not can_start_quest(quest_id):
+		push_warning("Quest %d belum dapat diambil! Selesaikan Quest %d terlebih dahulu." % [quest_id, quest_id - 1])
+		return
 	active_quest_id = quest_id
 	set_quest_status(quest_id, QuestStatus.IN_PROGRESS)
 

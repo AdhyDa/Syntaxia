@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://fvrwanxrv62"]
+
+[ext_resource type="Script" uid="uid://b0s5hgbns7exl" path="res://content/character/NPC/narji_dialog_ui.gd" id="1_narji"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="2_xqtfj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.117647, 0.0941176, 0.168627, 0.941176)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85098, 0.701961, 0.34902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.27451, 0.180392, 0.121569, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.729412, 0.54902, 0.298039, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="NarjiDialogUI" type="Control" unique_id=613631810]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_narji")
+
+[node name="DialogPanel" type="PanelContainer" parent="." unique_id=1573358392]
+custom_minimum_size = Vector2(900, 240)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -270.0
+offset_right = 450.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="DialogPanel" unique_id=286215022]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="DialogPanel/Margin" unique_id=1948516404]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SpeakerNameLabel" type="Label" parent="DialogPanel/Margin/VBox" unique_id=633263748]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85098, 0.301961, 1)
+theme_override_fonts/font = ExtResource("2_xqtfj")
+theme_override_font_sizes/font_size = 28
+text = "NARJI (calon ksatria syntaxia)"
+
+[node name="DialogTextLabel" type="Label" parent="DialogPanel/Margin/VBox" unique_id=398180644]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_fonts/font = ExtResource("2_xqtfj")
+theme_override_font_sizes/font_size = 22
+text = "Teks dialog..."
+autowrap_mode = 2
+
+[node name="HBoxButtons" type="HBoxContainer" parent="DialogPanel/Margin/VBox" unique_id=680069911]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="BtnOption2" type="Button" parent="DialogPanel/Margin/VBox/HBoxButtons" unique_id=2051234437]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_xqtfj")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Nanti Dulu"
+
+[node name="BtnOption1" type="Button" parent="DialogPanel/Margin/VBox/HBoxButtons" unique_id=1596841139]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_xqtfj")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "Terima Quest"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3x7m1w8e4qav"]
+[gd_scene format=3 uid="uid://c3x7m1w8e4qav"]
 
 [ext_resource type="Script" uid="uid://bwqnjkfouy37g" path="res://system/ui/grimoire_ui.gd" id="1_grim"]
 [ext_resource type="Texture2D" uid="uid://dfhfxh0avnqov" path="res://content/ui/code_terminal_ui_wood (1).png" id="2_wood"]
@@ -126,7 +126,6 @@ selecting_enabled = false
 drag_and_drop_selection_enabled = false
 middle_mouse_paste_enabled = false
 virtual_keyboard_enabled = false
-gutters_draw_line_numbers = false
 
 [node name="PlayerCodeEdit" type="CodeEdit" parent="WoodFrame/CodeContainer" unique_id=719112190]
 unique_name_in_owner = true
@@ -143,7 +142,6 @@ theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("StyleBoxEmpty_code")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_code")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_code")
-gutters_draw_line_numbers = true
 
 [node name="StatusLabel" type="Label" parent="WoodFrame" unique_id=682941285]
 unique_name_in_owner = true
