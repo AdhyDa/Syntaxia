@@ -38,6 +38,7 @@ const TEX_BTN_PRESSED: Texture2D = preload("res://content/ui/shop_ui/button_pres
 @onready var btn_action: TextureButton = %BtnAction
 @onready var action_label: Label = %ActionLabel
 @onready var btn_back: TextureButton = %BtnBack
+@onready var container_gelap: PanelContainer = $MainContainer/ContainerGelap
 
 var current_mode: ShopMode = ShopMode.BUY
 var selected_item_id: String = "air"
@@ -45,6 +46,8 @@ var selected_item_id: String = "air"
 # HBox harga di panel kanan (angka + ikon koin), dibuat dinamis di _ready()
 var _detail_price_hbox: HBoxContainer = null
 var _detail_price_number_lbl: Label = null
+var _mode_indicator_label: Label = null
+var _panel_style: StyleBoxFlat = null
 
 
 func _ready() -> void:
@@ -80,7 +83,7 @@ func _ready() -> void:
 		
 		_detail_price_number_lbl = Label.new()
 		_detail_price_number_lbl.add_theme_font_override("font", UI_FONT)
-		_detail_price_number_lbl.add_theme_font_size_override("font_size", 42)
+		_detail_price_number_lbl.add_theme_font_size_override("font_size", 48)
 		_detail_price_number_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		_detail_price_number_lbl.text = "0"
 		_detail_price_hbox.add_child(_detail_price_number_lbl)
@@ -89,6 +92,32 @@ func _ready() -> void:
 		_detail_price_hbox.add_child(coin_icon)
 		
 		parent_node.add_child(_detail_price_hbox)
+
+	# Duplikasi StyleBoxFlat latar gelap agar border_color bisa diubah dinamis tanpa merusak resource asli
+	if container_gelap:
+		var base_sb = container_gelap.get_theme_stylebox("panel")
+		if base_sb is StyleBoxFlat:
+			_panel_style = base_sb.duplicate()
+			container_gelap.add_theme_stylebox_override("panel", _panel_style)
+
+	# Buat Label Sub-Judul Status Mode di atas box Selected Item (RightPanel)
+	var right_panel = get_node_or_null("MainContainer/PanelsHBox/RightPanel")
+	if right_panel:
+		_mode_indicator_label = Label.new()
+		_mode_indicator_label.add_theme_font_override("font", UI_FONT)
+		_mode_indicator_label.add_theme_font_size_override("font_size", 32)
+		_mode_indicator_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_mode_indicator_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		_mode_indicator_label.anchors_preset = Control.PRESET_CENTER_TOP
+		_mode_indicator_label.anchor_left = 0.5
+		_mode_indicator_label.anchor_right = 0.5
+		_mode_indicator_label.offset_left = -200.0
+		_mode_indicator_label.offset_right = 200.0
+		_mode_indicator_label.offset_top = 40.0 # Posisi tepat di atas nama & box item
+		_mode_indicator_label.offset_bottom = 145.0
+		_mode_indicator_label.add_theme_constant_override("outline_size", 3)
+		_mode_indicator_label.add_theme_color_override("font_outline_color", Color(0.1, 0.08, 0.06, 1.0))
+		right_panel.add_child(_mode_indicator_label)
 		
 	# Bekukan kontrol pemain saat berbelanja
 	_freeze_player(true)
@@ -96,6 +125,7 @@ func _ready() -> void:
 	# Default state: Tab BUY aktif dan item pertama "air" terpilih
 	current_mode = ShopMode.BUY
 	selected_item_id = "air"
+	_update_tab_visuals()
 	refresh_ui()
 
 
@@ -121,12 +151,14 @@ func _on_inventory_changed(_item_id: String, _amount: int) -> void:
 func _on_tab_buy_pressed() -> void:
 	if current_mode != ShopMode.BUY:
 		current_mode = ShopMode.BUY
+		_update_tab_visuals()
 		refresh_ui()
 
 
 func _on_tab_sell_pressed() -> void:
 	if current_mode != ShopMode.SELL:
 		current_mode = ShopMode.SELL
+		_update_tab_visuals()
 		refresh_ui()
 
 
@@ -200,6 +232,87 @@ func get_item_icon(item_id: String) -> Texture2D:
 	return null
 
 
+## Memperbarui tampilan visual tab BUY dan SELL, border panel, dan sub-judul mode
+func _update_tab_visuals() -> void:
+	if not btn_tab_buy or not btn_tab_sell:
+		return
+
+	var is_buy := (current_mode == ShopMode.BUY)
+
+	# Pastikan pivot_offset di tengah tombol agar pembesaran skala simetris
+	btn_tab_buy.pivot_offset = btn_tab_buy.size / 2.0 if btn_tab_buy.size != Vector2.ZERO else btn_tab_buy.custom_minimum_size / 2.0
+	btn_tab_sell.pivot_offset = btn_tab_sell.size / 2.0 if btn_tab_sell.size != Vector2.ZERO else btn_tab_sell.custom_minimum_size / 2.0
+
+	# 1. Visual Tab BUY
+	if is_buy:
+		btn_tab_buy.scale = Vector2(1.1, 1.1)
+		btn_tab_buy.texture_normal = TEX_TAB_PRESSED
+		btn_tab_buy.modulate = Color(0.88, 1.0, 0.88, 1.0) # Sorotan hijau/emas cerah
+		var col_active := Color("#2b1b12")
+		btn_tab_buy.add_theme_color_override("font_color", col_active)
+		btn_tab_buy.add_theme_color_override("font_hover_color", col_active)
+		btn_tab_buy.add_theme_color_override("font_pressed_color", col_active)
+		var lbl_buy := btn_tab_buy.get_node_or_null("Label")
+		if lbl_buy:
+			lbl_buy.text = "▼ BUY"
+			lbl_buy.add_theme_color_override("font_color", col_active)
+			lbl_buy.add_theme_constant_override("outline_size", 0)
+	else:
+		btn_tab_buy.scale = Vector2(1.0, 1.0)
+		btn_tab_buy.texture_normal = TEX_TAB_NORMAL
+		btn_tab_buy.modulate = Color(0.45, 0.45, 0.45, 1.0) # Redup signifikan
+		var col_inactive := Color("#7a6252")
+		btn_tab_buy.add_theme_color_override("font_color", col_inactive)
+		btn_tab_buy.add_theme_color_override("font_hover_color", col_inactive)
+		btn_tab_buy.add_theme_color_override("font_pressed_color", col_inactive)
+		var lbl_buy := btn_tab_buy.get_node_or_null("Label")
+		if lbl_buy:
+			lbl_buy.text = "BUY"
+			lbl_buy.add_theme_color_override("font_color", col_inactive)
+			lbl_buy.add_theme_constant_override("outline_size", 0)
+
+	# 2. Visual Tab SELL
+	if not is_buy:
+		btn_tab_sell.scale = Vector2(1.1, 1.1)
+		btn_tab_sell.texture_normal = TEX_TAB_PRESSED
+		btn_tab_sell.modulate = Color(1.0, 0.82, 0.60, 1.0) # Sorotan jingga hangat cerah
+		var col_active := Color("#2b1b12")
+		btn_tab_sell.add_theme_color_override("font_color", col_active)
+		btn_tab_sell.add_theme_color_override("font_hover_color", col_active)
+		btn_tab_sell.add_theme_color_override("font_pressed_color", col_active)
+		var lbl_sell := btn_tab_sell.get_node_or_null("Label")
+		if lbl_sell:
+			lbl_sell.text = "▼ SELL"
+			lbl_sell.add_theme_color_override("font_color", col_active)
+			lbl_sell.add_theme_constant_override("outline_size", 0)
+	else:
+		btn_tab_sell.scale = Vector2(1.0, 1.0)
+		btn_tab_sell.texture_normal = TEX_TAB_NORMAL
+		btn_tab_sell.modulate = Color(0.45, 0.45, 0.45, 1.0) # Redup signifikan
+		var col_inactive := Color("#7a6252")
+		btn_tab_sell.add_theme_color_override("font_color", col_inactive)
+		btn_tab_sell.add_theme_color_override("font_hover_color", col_inactive)
+		btn_tab_sell.add_theme_color_override("font_pressed_color", col_inactive)
+		var lbl_sell := btn_tab_sell.get_node_or_null("Label")
+		if lbl_sell:
+			lbl_sell.text = "SELL"
+			lbl_sell.add_theme_color_override("font_color", col_inactive)
+			lbl_sell.add_theme_constant_override("outline_size", 0)
+
+	# 3. Label Sub-Judul Status Mode
+	if _mode_indicator_label:
+		if is_buy:
+			_mode_indicator_label.text = "[ MODE BELI - STOK TOKO ]"
+			_mode_indicator_label.add_theme_color_override("font_color", Color(0.38, 0.92, 0.42, 1.0))
+		else:
+			_mode_indicator_label.text = "[ MODE JUAL - ISI TAS ]"
+			_mode_indicator_label.add_theme_color_override("font_color", Color(1.0, 0.68, 0.22, 1.0))
+
+	# 4. Ubah Warna Garis Tepi (Border) Panel Utama
+	if _panel_style:
+		_panel_style.border_color = Color(0.25, 0.82, 0.42, 1.0) if is_buy else Color(0.95, 0.55, 0.15, 1.0)
+
+
 func refresh_ui() -> void:
 	# 1. Update Tampilan Koin
 	var gold_val: int = QuestManager.current_gold if is_instance_valid(QuestManager) else 0
@@ -207,13 +320,7 @@ func refresh_ui() -> void:
 		coin_label.text = "%d G" % gold_val
 		
 	# 2. Update Status Visual Tab BUY & SELL
-	if btn_tab_buy and btn_tab_sell:
-		if current_mode == ShopMode.BUY:
-			btn_tab_buy.texture_normal = TEX_TAB_PRESSED
-			btn_tab_sell.texture_normal = TEX_TAB_NORMAL
-		else:
-			btn_tab_buy.texture_normal = TEX_TAB_NORMAL
-			btn_tab_sell.texture_normal = TEX_TAB_PRESSED
+	_update_tab_visuals()
 			
 	# 3. Render Kartu Item di Panel Kiri
 	_render_item_cards()
@@ -350,7 +457,7 @@ func _create_card_node(it_id: String) -> Control:
 			price_val = QuestManager.get_item_sell_price(it_id)
 			
 	var price_color := Color(0.24, 0.14, 0.08, 1)
-	var price_hbox := _make_price_hbox(price_val, 24, price_color, Vector2(220, 45), Vector2(10, 165))
+	var price_hbox := _make_price_hbox(price_val, 32, price_color, Vector2(220, 45), Vector2(10, 165))
 	card_btn.add_child(price_hbox)
 	
 	# Connect Klik Kartu
@@ -396,7 +503,7 @@ func _render_right_detail_panel() -> void:
 		# Validasi Tombol BUY: Disabled jika koin kurang ATAU stok tas sudah penuh 5/5
 		var can_buy: bool = (player_gold >= buy_price and current_stock < (PlayerInventory.MAX_STACK if is_instance_valid(PlayerInventory) else 5))
 		btn_action.disabled = not can_buy
-		btn_action.modulate = Color(1, 1, 1, 1) if can_buy else Color(0.65, 0.65, 0.65, 0.7)
+		btn_action.modulate = Color(0.70, 1.0, 0.70, 1.0) if can_buy else Color(0.65, 0.65, 0.65, 0.7)
 		btn_action.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if can_buy else Control.CURSOR_ARROW
 	else:
 		# Update HBox harga: angka coklat + ikon koin
@@ -408,5 +515,5 @@ func _render_right_detail_panel() -> void:
 		# Validasi Tombol SELL: Disabled jika stok di tas 0
 		var can_sell: bool = (current_stock > 0)
 		btn_action.disabled = not can_sell
-		btn_action.modulate = Color(1, 1, 1, 1) if can_sell else Color(0.65, 0.65, 0.65, 0.7)
+		btn_action.modulate = Color(1.0, 0.78, 0.45, 1.0) if can_sell else Color(0.65, 0.65, 0.65, 0.7)
 		btn_action.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if can_sell else Control.CURSOR_ARROW

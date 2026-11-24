@@ -13,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://d2fycqc5qhym5" path="res://content/ui/shop_ui/slot_selected.png" id="12_slot_sel"]
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="13_font"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifisb"]
+bg_color = Color(0.101960786, 0.078431375, 0.07058824, 0.84313726)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.23921569, 0.18039216, 0.15686275, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_coin"]
 atlas = ExtResource("11_coin")
 region = Rect2(0, 0, 10, 10)
@@ -49,6 +57,15 @@ offset_right = 720.0
 offset_bottom = 420.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ContainerGelap" type="PanelContainer" parent="MainContainer" unique_id=230171786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifisb")
 
 [node name="TopBar" type="Control" parent="MainContainer" unique_id=1122334455]
 layout_mode = 1
@@ -173,7 +190,7 @@ alignment = 1
 
 [node name="CoinIcon" type="TextureRect" parent="MainContainer/TopBar/CoinRow" unique_id=1011121314]
 texture_filter = 1
-custom_minimum_size = Vector2(36, 36)
+custom_minimum_size = Vector2(45, 45)
 layout_mode = 2
 texture = SubResource("AtlasTexture_coin")
 expand_mode = 1
@@ -186,7 +203,7 @@ theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("13_font")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 47
 text = "0 G"
 vertical_alignment = 1
 
