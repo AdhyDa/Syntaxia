@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" path="res://system/spawner/grass_spawner.tscn" id="19_spawner"]
 [ext_resource type="Script" uid="uid://cvyy0iypq6esc" path="res://content/character/NPC/nara_interaction.gd" id="20_nara"]
 [ext_resource type="Script" uid="uid://felgvips8h" path="res://content/environment/toko_interaction.gd" id="21_toko"]
+[ext_resource type="PackedScene" uid="uid://cknxtiahgawtb" path="res://content/character/NPC/NPC3.tscn" id="22_npc3"]
+[ext_resource type="Script" uid="uid://dh1prsj2w4jbn" path="res://content/character/NPC/spirit_interaction.gd" id="23_spirit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uupxc"]
 size = Vector2(160.93558, 153.45029)
@@ -209,6 +211,16 @@ position = Vector2(-266, 176)
 script = ExtResource("15_483ib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tilemap/NPC2" index="4" unique_id=1818284825]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_wa8bf")
+
+[node name="NPC3" parent="Tilemap" index="12" unique_id=1183349288 instance=ExtResource("22_npc3")]
+position = Vector2(-424, -327)
+
+[node name="SpiritInteraction" type="Node2D" parent="Tilemap/NPC3" index="3" unique_id=1237632327]
+script = ExtResource("23_spirit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tilemap/NPC3" index="4" unique_id=1818284826]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_wa8bf")
 

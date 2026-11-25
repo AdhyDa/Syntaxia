@@ -63,6 +63,7 @@ const QUEST_DATABASE: Dictionary = {
 		"result_item_name": "Wedang Jahe Sereh",
 		"reward_gold": 10,
 		"reward_exp": 100,
+		"hint": "Cari NPC bernama Nara\ndi area perumahan",
 		"ghost_template": "FUNGSI Ekstrak_Panas(Jahe, Sereh)\n    KEMBALIKAN Esensi_Hangat\nAKHIR_FUNGSI\n\nPROSEDUR Buat_Wedang_Jahe()\n    Siapkan_Gelas()\n    Seduh_Air()\n    esensi = Ekstrak_Panas(Jahe, Sereh)\n    Campurkan(esensi)\nAKHIR_PROSEDUR"
 	},
 	2: {
@@ -77,21 +78,23 @@ const QUEST_DATABASE: Dictionary = {
 		"result_item_name": "Beras Kencur",
 		"reward_gold": 25,
 		"reward_exp": 100,
+		"hint": "Cari NPC bernama Narji\ndi area latihan tempur",
 		"ghost_template": "FUNGSI Ekstrak_Stamina(Kencur, Beras)\n    KEMBALIKAN Esensi_Vitalitas\nAKHIR_FUNGSI\n\nPROSEDUR Buat_Beras_Kencur()\n    Siapkan_Gelas()\n    Seduh_Air()\n    esensi = Ekstrak_Stamina(Kencur, Beras)\n    Campurkan(esensi)\nAKHIR_PROSEDUR"
 	},
 	3: {
 		"id": 3,
-		"title": "Quest 3: Tolak Bala Mbah Node",
+		"title": "Quest 3: Berkah Spirit Leluhur",
 		"short_name": "Gepyokan",
-		"client": "Mbah Node (Sesepuh Desa)",
-		"client_short": "Mbah Node",
-		"story": "Mbah Node membutuhkan ramuan Gepyokan untuk ritual tolak bala desa. Racikkan segera sebelum matahari terbenam!",
-		"required_items": {"gulamerah": 1, "asamjawa": 1, "air": 1},
+		"client": "Spirit Leluhur (Penjaga Resep Kuno)",
+		"client_short": "Spirit Leluhur",
+		"story": "Spirit Leluhur meminta ramuan sakral Gepyokan untuk memperkuat proteksi kuno desa. Ekstrak esensi manis dan pelindung dengan fungsi terpisah sebelum menyeduhnya di kuali!",
+		"required_items": {"gulamerah": 3, "asamjawa": 3, "air": 4},
 		"result_item": "gepyokan",
 		"result_item_name": "Gepyokan",
-		"reward_gold": 30,
-		"reward_exp": 140,
-		"ghost_template": "FUNGSI Ekstrak_Pelindung(GulaMerah, AsamJawa)\n    KEMBALIKAN Esensi_Tolak_Bala\nAKHIR_FUNGSI\n\nPROSEDUR Buat_Gepyokan()\n    Siapkan_Gelas()\n    Seduh_Air()\n    esensi = Ekstrak_Pelindung(GulaMerah, AsamJawa)\n    Campurkan(esensi)\nAKHIR_PROSEDUR"
+		"reward_gold": 50,
+		"reward_exp": 200,
+		"hint": "Cari Spirit Leluhur\ndi kuburan kuno desa",
+		"ghost_template": "FUNGSI Ekstrak_Manis(GulaMerah)\n    KEMBALIKAN Esensi_Manis\nAKHIR_FUNGSI\n\nFUNGSI Ekstrak_Pelindung(AsamJawa)\n    KEMBALIKAN Esensi_Tolak_Bala\nAKHIR_FUNGSI\n\nPROSEDUR Buat_Gepyokan()\n    Siapkan_Gelas()\n    Seduh_Air()\n    esensi_manis = Ekstrak_Manis(GulaMerah)\n    esensi_pelindung = Ekstrak_Pelindung(AsamJawa)\n    Campurkan(esensi_manis)\n    Campurkan(esensi_pelindung)\nAKHIR_PROSEDUR"
 	}
 }
 
@@ -157,6 +160,32 @@ func is_delivery_ready(quest_id: int) -> bool:
 	if not is_instance_valid(PlayerInventory):
 		return false
 	return PlayerInventory.has_item(data["result_item"])
+
+
+## Mendapatkan ID quest berikutnya yang harus diambil pemain (1, 2, 3, atau 0 jika semua selesai)
+func get_next_available_quest_id() -> int:
+	var keys: Array = QUEST_DATABASE.keys()
+	keys.sort()
+	for q_id in keys:
+		var st = get_quest_status(q_id)
+		if st != QuestStatus.COMPLETED:
+			return q_id
+	return 0
+
+
+## Mendapatkan petunjuk arah pencarian NPC untuk quest berikutnya
+func get_current_guide() -> Dictionary:
+	var next_id = get_next_available_quest_id()
+	if next_id == 0:
+		return {
+			"title": "Selesai",
+			"hint": "Semua pesanan selesai!\nDesa Syntaxia aman."
+		}
+	var data = get_quest_data(next_id)
+	return {
+		"title": "Petunjuk",
+		"hint": data.get("hint", "Temui warga desa untuk menerima pesanan.")
+	}
 
 
 ## ─────────────────────────────────────────────

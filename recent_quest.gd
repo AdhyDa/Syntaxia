@@ -35,8 +35,13 @@ func update_quest_display() -> void:
 	var q_status = QuestManager.get_quest_status(q_id) if (is_instance_valid(QuestManager) and q_id > 0) else QuestManager.QuestStatus.NOT_STARTED
 	var quest_data: Dictionary = QuestManager.get_quest_data(q_id) if is_instance_valid(QuestManager) else {}
 
-	if q_id == 0 or quest_data.is_empty() or q_status == QuestManager.QuestStatus.NOT_STARTED:
-		set_quest("Quest", "Belum ada quest\nyang diambil")
+	# Jika tidak ada quest yang sedang in progress atau ready to deliver, tampilkan petunjuk mencari NPC berikutnya
+	if q_id == 0 or quest_data.is_empty() or q_status == QuestManager.QuestStatus.NOT_STARTED or q_status == QuestManager.QuestStatus.COMPLETED:
+		if is_instance_valid(QuestManager):
+			var guide = QuestManager.get_current_guide()
+			set_quest(guide["title"], guide["hint"])
+		else:
+			set_quest("Petunjuk", "Cari NPC bernama Nara\ndi area perumahan")
 		return
 
 	var short_name: String = quest_data.get("short_name", "Pesanan")
@@ -57,8 +62,6 @@ func update_quest_display() -> void:
 				set_quest(short_name, "\n".join(lines))
 		QuestManager.QuestStatus.READY_TO_DELIVER:
 			set_quest(short_name, "- Jamu siap!\n- Serahkan ke " + client_short)
-		QuestManager.QuestStatus.COMPLETED:
-			set_quest("Selesai", "Pesanan " + client_short + "\nsudah beres!")
 
 
 func set_quest(title_text: String, objectives_text: String) -> void:

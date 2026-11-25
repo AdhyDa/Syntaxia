@@ -221,7 +221,7 @@ script = ExtResource("11_w52t8")
 
 [node name="CameraGrid" type="Camera2D" parent="." unique_id=1541932798]
 unique_name_in_owner = true
-offset = Vector2(24, 16)
+offset = Vector2(0, -6)
 zoom = Vector2(4, 4)
 process_callback = 0
 script = ExtResource("4_am12t")

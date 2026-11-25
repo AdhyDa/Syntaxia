@@ -37,6 +37,9 @@ func test_quest_database_integrity() -> void:
 	var q3 = qm.get_quest_data(3)
 	assert_false(q3.is_empty(), "Quest 3 harus ada di database")
 	assert_eq(q3.get("short_name"), "Gepyokan", "Short name Quest 3 harus Gepyokan")
+	assert_eq(q3.get("client_short"), "Spirit Leluhur", "Client short Quest 3 harus Spirit Leluhur")
+	assert_eq(q3.get("reward_gold"), 50, "Reward gold Quest 3 harus 50")
+	assert_eq(q3.get("reward_exp"), 200, "Reward exp Quest 3 harus 200")
 
 
 func test_item_display_names() -> void:
@@ -48,6 +51,40 @@ func test_item_display_names() -> void:
 	assert_eq(qm.get_item_display_name("kencur"), "Kencur", "kencur -> Kencur")
 	assert_eq(qm.get_item_display_name("gulamerah"), "Gula Merah", "gulamerah -> Gula Merah")
 	assert_eq(qm.get_item_display_name("asamjawa"), "Asam Jawa", "asamjawa -> Asam Jawa")
+
+
+func test_quest_npc_hints_and_guides() -> void:
+	var qm = QuestManager if (QuestManager != null and is_instance_valid(QuestManager)) else qm_instance
+	
+	# Kondisi awal: belum ada quest
+	qm.quest_statuses.clear()
+	qm.active_quest_id = 0
+	assert_eq(qm.get_next_available_quest_id(), 1, "Quest berikutnya di awal harus Quest 1")
+	var guide1 = qm.get_current_guide()
+	assert_eq(guide1["title"], "Petunjuk", "Title guide awal harus Petunjuk")
+	assert_true("Nara" in guide1["hint"], "Petunjuk awal harus mengarahkan ke Nara")
+	
+	# Setelah Quest 1 selesai, harus arahkan ke Narji (Quest 2)
+	qm.set_quest_status(1, QuestManager.QuestStatus.COMPLETED)
+	assert_eq(qm.get_next_available_quest_id(), 2, "Setelah Quest 1 beres, harus Quest 2")
+	var guide2 = qm.get_current_guide()
+	assert_true("Narji" in guide2["hint"], "Petunjuk setelah Q1 harus mengarahkan ke Narji")
+	
+	# Setelah Quest 2 selesai, harus arahkan ke Spirit Leluhur (Quest 3)
+	qm.set_quest_status(2, QuestManager.QuestStatus.COMPLETED)
+	assert_eq(qm.get_next_available_quest_id(), 3, "Setelah Quest 2 beres, harus Quest 3")
+	var guide3 = qm.get_current_guide()
+	assert_true("Spirit" in guide3["hint"], "Petunjuk setelah Q2 harus mengarahkan ke Spirit Leluhur")
+	
+	# Setelah Quest 3 selesai, semua beres
+	qm.set_quest_status(3, QuestManager.QuestStatus.COMPLETED)
+	assert_eq(qm.get_next_available_quest_id(), 0, "Setelah semua beres, next id = 0")
+	var guide_end = qm.get_current_guide()
+	assert_eq(guide_end["title"], "Selesai", "Title setelah semua selesai harus Selesai")
+	
+	# Bersihkan state kembali
+	qm.quest_statuses.clear()
+	qm.active_quest_id = 0
 
 
 func test_exp_and_level_up_math() -> void:
@@ -103,3 +140,12 @@ func test_recipe_parser_quest_lock_and_validation() -> void:
 		assert_true("Bahan di tas kurang" in res_valid_q2.message, "Harus gagal karena bahan tas kurang, bukan syntax error: " + res_valid_q2.message)
 	else:
 		assert_true(res_valid_q2.success, "Sintaks template quest 2 valid")
+
+	# Validasi Quest 3
+	var q3_data = qm.get_quest_data(3)
+	var valid_code_q3 = q3_data["ghost_template"]
+	var res_valid_q3 = RecipeParser._validate_level_3(valid_code_q3)
+	if not res_valid_q3.success:
+		assert_true("Bahan di tas kurang" in res_valid_q3.message, "Harus gagal karena bahan tas kurang, bukan syntax error: " + res_valid_q3.message)
+	else:
+		assert_true(res_valid_q3.success, "Sintaks template quest 3 valid")
