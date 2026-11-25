@@ -39,6 +39,19 @@ const ITEM_NAMES: Dictionary = {
 	"gepyokan": "Gepyokan"
 }
 
+const ITEM_ICONS: Dictionary = {
+	"jahe": "res://content/collectible/bahan/jahe.png",
+	"serai": "res://content/collectible/bahan/serai.png",
+	"sereh": "res://content/collectible/bahan/serai.png",
+	"air": "res://content/collectible/bahan/air.png",
+	"kencur": "res://content/collectible/bahan/kencur.png",
+	"beras": "res://content/collectible/bahan/beras.png",
+	"gulamerah": "res://content/collectible/bahan/gula_merah.png",
+	"gula_merah": "res://content/collectible/bahan/gula_merah.png",
+	"asamjawa": "res://content/collectible/bahan/asam_jawa.png",
+	"asam_jawa": "res://content/collectible/bahan/asam_jawa.png"
+}
+
 ## Data ekonomi Hardcore untuk 7 bahan herbal di Toko Mpok Sintaks
 const ITEM_PRICES: Dictionary = {
 	"air": {"buy": 6, "sell": 1},
@@ -126,6 +139,12 @@ func get_item_display_name(item_id: String) -> String:
 	if ITEM_NAMES.has(lower):
 		return ITEM_NAMES[lower]
 	return item_id.capitalize()
+
+
+## Mengambil path tekstur ikon dari ID item/bahan.
+func get_item_icon_path(item_id: String) -> String:
+	var lower = item_id.to_lower()
+	return ITEM_ICONS.get(lower, "")
 
 
 ## Ambil data quest dari database berdasarkan ID.

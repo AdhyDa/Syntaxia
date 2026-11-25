@@ -3,7 +3,7 @@ extends Control
 const QUEST_DETAIL_POPUP_SCENE = preload("res://system/quest/quest_detail_popup.tscn")
 
 @onready var label_title: Label = %LabelTitle
-@onready var label_objectives: Label = %LabelObjective
+@onready var label_objectives: RichTextLabel = %LabelObjective
 @onready var btn_quest_detail: Button = %BtnQuestDetail
 
 
@@ -58,7 +58,11 @@ func update_quest_display() -> void:
 					var req_amount = req_items[item_id]
 					var cur_amount = PlayerInventory.get_item_count(item_id) if is_instance_valid(PlayerInventory) else 0
 					var item_name = QuestManager.get_item_display_name(item_id)
-					lines.append("- %s: %d/%d" % [item_name, cur_amount, req_amount])
+					var icon_path = QuestManager.get_item_icon_path(item_id) if is_instance_valid(QuestManager) else ""
+					if not icon_path.is_empty():
+						lines.append("[img=18x18]%s[/img] %s: %d/%d" % [icon_path, item_name, cur_amount, req_amount])
+					else:
+						lines.append("- %s: %d/%d" % [item_name, cur_amount, req_amount])
 				set_quest(short_name, "\n".join(lines))
 		QuestManager.QuestStatus.READY_TO_DELIVER:
 			set_quest(short_name, "- Jamu siap!\n- Serahkan ke " + client_short)

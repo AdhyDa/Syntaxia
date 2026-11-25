@@ -40,6 +40,14 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wa8bf"]
 
+[sub_resource type="Gradient" id="Gradient_w2vh6"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ifisb"]
+gradient = SubResource("Gradient_w2vh6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qsb7"]
 size = Vector2(20, 10)
 
@@ -223,6 +231,13 @@ script = ExtResource("23_spirit")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tilemap/NPC3" index="4" unique_id=1818284826]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_wa8bf")
+
+[node name="PointLight2D" type="PointLight2D" parent="Tilemap" index="13" unique_id=1892832729]
+position = Vector2(7.9999995, -167.5)
+scale = Vector2(0.24999997, 0.234375)
+color = Color(1, 0.8117647, 0.4392157, 1)
+energy = 9.59
+texture = SubResource("GradientTexture2D_ifisb")
 
 [node name="Teleporter" type="Area2D" parent="." index="2" unique_id=1636826542 node_paths=PackedStringArray("target")]
 position = Vector2(16, -176)
