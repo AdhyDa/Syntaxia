@@ -67,7 +67,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_robot"]
+radius = 6.0
+
 [node name="SamuraiGreen" unique_id=894005264 instance=ExtResource("1_4xuoi")]
+collision_layer = 0
+collision_mask = 1
 speed = 90.0
 
 [node name="Sprite" parent="." index="2"]
@@ -82,3 +87,7 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_ifisb")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="Shape" type="CollisionShape2D" parent="." index="4" unique_id=1945502891]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_robot")

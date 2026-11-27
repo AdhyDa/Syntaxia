@@ -133,6 +133,7 @@ meteo_list = Array[int]([5])
 script = ExtResource("5_u7nr0")
 
 [node name="MapVillage" unique_id=264029724 instance=ExtResource("1_6r46d")]
+y_sort_enabled = true
 
 [node name="ScreenGridRef" parent="." index="0"]
 visible = false

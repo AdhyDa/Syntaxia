@@ -67,6 +67,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_book"]
+radius = 6.0
+
 [node name="Pig" unique_id=635013980 instance=ExtResource("1_xt1ub")]
 
 [node name="Shadow" parent="." index="0"]
@@ -86,3 +89,7 @@ animation = &"idle"
 autoplay = "idle"
 frame = 1
 frame_progress = 0.67696744
+
+[node name="Shape" type="CollisionShape2D" parent="." index="3" unique_id=1190539279]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_book")
