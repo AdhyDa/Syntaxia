@@ -175,7 +175,7 @@ script = ExtResource("8_8tm86")
 
 [node name="book" parent="Tilemap" index="7" unique_id=1279838483 instance=ExtResource("7_cu425")]
 position = Vector2(-107, -60)
-speed = 100
+speed = 90.0
 
 [node name="BehaviorFollow" type="Node2D" parent="Tilemap/book" index="2" unique_id=239390412 node_paths=PackedStringArray("target")]
 position = Vector2(-8, 5)
