@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://flvh8ns32iem"
+path="res://.godot/imported/Haruko Komiya, ATLUS Sound Team ATLUS GAME MUSIC - 全ての人の魂の詩 - Aria of the Soul.mp3-782a0f3af3f983c82361e4ff4e9b258e.mp3str"
+
+[deps]
+
+source_file="res://content/environment/Haruko Komiya, ATLUS Sound Team ATLUS GAME MUSIC - 全ての人の魂の詩 - Aria of the Soul.mp3"
+dest_files=["res://.godot/imported/Haruko Komiya, ATLUS Sound Team ATLUS GAME MUSIC - 全ての人の魂の詩 - Aria of the Soul.mp3-782a0f3af3f983c82361e4ff4e9b258e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

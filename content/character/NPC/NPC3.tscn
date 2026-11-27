@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cknxtiahgawtb"]
+
+[ext_resource type="PackedScene" uid="uid://skrlnoimlhsv" path="res://system/character/character.tscn" id="1_13idc"]
+[ext_resource type="Texture2D" uid="uid://dow55olgaklym" path="res://content/character/NPC/Spirit.png" id="2_13idc"]
+
+[node name="SamuraiBlue" unique_id=1183349287 instance=ExtResource("1_13idc")]
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource("2_13idc")

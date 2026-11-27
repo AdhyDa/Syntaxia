@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dhojuw3shk3ig"]
+
+[ext_resource type="Texture2D" uid="uid://dfhfxh0avnqov" path="res://content/ui/code_terminal_ui_wood (1).png" id="1_4l7hw"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="2_p4eq1"]
+
+[node name="CodeTerminal" type="Control" unique_id=1803710888]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TerminalBackground" type="NinePatchRect" parent="." unique_id=1058211861]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4l7hw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1725020670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=941507074]
+layout_mode = 2
+
+[node name="HeaderTitle" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1726062461]
+layout_mode = 2
+
+[node name="TextStack" type="Control" parent="MarginContainer/VBoxContainer" unique_id=954841538]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlaceholderText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextStack" unique_id=734720866]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.3764706, 0.19215687, 0.12156863, 0.42745098)
+theme_override_fonts/normal_font = ExtResource("2_p4eq1")
+theme_override_font_sizes/normal_font_size = 60
+text = "Tes"
+
+[node name="PlayerInputText" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TextStack" unique_id=53208377]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.3764706, 0.19215687, 0.12156863, 1)
+theme_override_fonts/normal_font = ExtResource("2_p4eq1")
+theme_override_font_sizes/normal_font_size = 60

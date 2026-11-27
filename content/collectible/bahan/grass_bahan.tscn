@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://grass_bahan_collectible"]
+
+[ext_resource type="PackedScene" path="res://system/collectible/collectible.tscn" id="1_base"]
+[ext_resource type="Resource" path="res://content/collectible/bahan/grass.tres" id="2_grassres"]
+[ext_resource type="Texture2D" uid="uid://bi6x2xy0kcgn7" path="res://content/collectible/bahan/grass.png" id="3_grasstex"]
+
+[node name="GrassBahan" instance=ExtResource("1_base")]
+resource = ExtResource("2_grassres")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_grasstex")
+scale = Vector2(0.5, 0.5)

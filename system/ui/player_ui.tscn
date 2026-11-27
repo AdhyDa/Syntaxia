@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://ck8bsyolnkr5h"]
+
+[ext_resource type="Script" uid="uid://crch82nqup10m" path="res://system/ui/player_ui.gd" id="1_ky034"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="2_hdt68"]
+[ext_resource type="Texture2D" uid="uid://bg8a6raavrvkm" path="res://content/collectible/coin/Coin2.png" id="2_ps25k"]
+[ext_resource type="Texture2D" uid="uid://ifqx1lqt5hk" path="res://content/ui/exp_bar_empty.png" id="4_uwbna"]
+[ext_resource type="Texture2D" uid="uid://drialc85vx0qw" path="res://content/ui/exp_bar_full.png" id="5_4fr4j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkbqd"]
+atlas = ExtResource("2_ps25k")
+region = Rect2(0, 0, 10.498314, 10)
+
+[node name="PlayerUi" type="Control" unique_id=2084834490]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_ky034")
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=1950282871]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin" unique_id=2037539726]
+layout_mode = 2
+
+[node name="GoldRow" type="HBoxContainer" parent="MainMargin/VBoxContainer" unique_id=1152323663]
+layout_mode = 2
+
+[node name="GoldIcon" type="TextureRect" parent="MainMargin/VBoxContainer/GoldRow" unique_id=52605779]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vkbqd")
+expand_mode = 2
+
+[node name="GoldLabel" type="Label" parent="MainMargin/VBoxContainer/GoldRow" unique_id=868040057]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.77254903, 0.12156863, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_hdt68")
+theme_override_font_sizes/font_size = 13
+text = "0"
+
+[node name="ExpRow" type="VBoxContainer" parent="MainMargin/VBoxContainer" unique_id=1897102003]
+layout_mode = 2
+
+[node name="ExpLabel" type="Label" parent="MainMargin/VBoxContainer/ExpRow" unique_id=513279601]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3764706, 0.19215687, 0.12156863, 1)
+theme_override_colors/font_outline_color = Color(0.7344815, 0.64245826, 0.035569396, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_hdt68")
+theme_override_font_sizes/font_size = 13
+text = "Lv. 1"
+
+[node name="ExpBar" type="TextureProgressBar" parent="MainMargin/VBoxContainer/ExpRow" unique_id=2105689370]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 14)
+layout_mode = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_uwbna")
+texture_progress = ExtResource("5_4fr4j")
+
+[node name="CollectibleContainer" type="HFlowContainer" parent="MainMargin/VBoxContainer" unique_id=1498321045]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 3

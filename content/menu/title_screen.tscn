@@ -1,0 +1,486 @@
+[gd_scene format=3 uid="uid://by5fjij7yiyla"]
+
+[ext_resource type="Texture2D" uid="uid://dp8tp5wtyhfjb" path="res://content/menu/aset_menu/bg_menu.jpg" id="1_6rr7n"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="1_pmwsi"]
+[ext_resource type="Script" uid="uid://y5xhtr8nb2e" path="res://content/menu/btn_start.gd" id="3_gxb8f"]
+[ext_resource type="Script" uid="uid://b8b2er10vssln" path="res://content/menu/btn_about.gd" id="4_7lbdi"]
+[ext_resource type="Script" uid="uid://crq6ri6s4wnbu" path="res://content/menu/btn_exit.gd" id="4_joqfy"]
+[ext_resource type="AudioStream" uid="uid://flvh8ns32iem" path="res://content/environment/Haruko Komiya, ATLUS Sound Team ATLUS GAME MUSIC - 全ての人の魂の詩 - Aria of the Soul.mp3" id="4_rf788"]
+[ext_resource type="Texture2D" uid="uid://bjkw4gcqd6s6a" path="res://content/menu/about/spellbook_popup_bg.png" id="6_58rk5"]
+[ext_resource type="LabelSettings" uid="uid://do3j3hf7mooey" path="res://system/ui/title_label.tres" id="7_du5gc"]
+[ext_resource type="LabelSettings" uid="uid://cmp8acqcjjnw3" path="res://system/ui/label_about.tres" id="7_u8oox"]
+[ext_resource type="Texture2D" uid="uid://33ymqqctp5cs" path="res://content/menu/about/pak harits pixel-Photoroom.png" id="8_sjbk0"]
+[ext_resource type="Texture2D" uid="uid://cokk5vwwixk6t" path="res://content/menu/about/WhatsApp Image 2026-10-27 at 16.28.16-Photoroom.png" id="9_w43uf"]
+[ext_resource type="Texture2D" uid="uid://jgjo2if86gc6" path="res://content/menu/about/WhatsApp Image 2026-10-27 at 19.37.21-Photoroom.png" id="10_du5gc"]
+[ext_resource type="Texture2D" uid="uid://bs4vmfd2wfqr8" path="res://content/menu/about/wajah pixelate-Photoroom.png" id="11_7lbdi"]
+[ext_resource type="Script" uid="uid://bk33qjnsrip1d" path="res://content/menu/button_close_about.gd" id="14_vry4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_imht2"]
+font = ExtResource("1_pmwsi")
+font_size = 132
+font_color = Color(0, 0.8980392, 1, 1)
+outline_size = 10
+outline_color = Color(0.09411765, 0.078431375, 0.14509805, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rr7n"]
+font = ExtResource("1_pmwsi")
+font_size = 28
+font_color = Color(0.29803923, 0.8235294, 0.10980392, 1)
+outline_size = 3
+outline_color = Color(0.16078432, 0.16078432, 0.003921569, 1)
+
+[sub_resource type="Animation" id="Animation_6rr7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(33, 102)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 216)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D2:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.09]
+}
+
+[sub_resource type="Animation" id="Animation_gxb8f"]
+resource_name = "floating"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.01, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(33, 102), Vector2(33, 105), Vector2(33, 102)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.01, 1.54, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(80, 216), Vector2(80, 220), Vector2(80, 216.64), Vector2(80, 220.297), Vector2(80, 216)]
+}
+
+[sub_resource type="Animation" id="Animation_rf788"]
+resource_name = "light_cyan"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D2:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.09, 2.17, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_joqfy"]
+resource_name = "ligth_magenta"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 3.46, 1.09]
+}
+
+[sub_resource type="Animation" id="Animation_58rk5"]
+resource_name = "pulse_light_magenta"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf788"]
+_data = {
+&"RESET": SubResource("Animation_6rr7n"),
+&"floating": SubResource("Animation_gxb8f"),
+&"light_cyan": SubResource("Animation_rf788"),
+&"ligth_magenta": SubResource("Animation_joqfy"),
+&"pulse_light_magenta": SubResource("Animation_58rk5")
+}
+
+[sub_resource type="Gradient" id="Gradient_u8oox"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ifisb"]
+gradient = SubResource("Gradient_u8oox")
+fill_to = Vector2(0.5, 0.5)
+
+[node name="TitleScreen" type="Control" unique_id=514390234]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundMenu" type="TextureRect" parent="." unique_id=1287870639]
+layout_mode = 0
+offset_right = 4132.519
+offset_bottom = 2306.5225
+scale = Vector2(0.46823734, 0.46823734)
+texture = ExtResource("1_6rr7n")
+
+[node name="Label" type="Label" parent="." unique_id=642806663]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -927.0
+offset_top = -438.0
+offset_right = -457.0
+offset_bottom = -317.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2884836, 1.2884836)
+theme_override_font_sizes/font_size = 40
+text = "Syntaxia"
+label_settings = SubResource("LabelSettings_imht2")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1639216313]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -880.0
+offset_top = -324.0
+offset_right = -595.0
+offset_bottom = -298.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.6969405, 1.6969405)
+text = "Make Potion with Code!"
+label_settings = SubResource("LabelSettings_6rr7n")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=641893419]
+libraries/ = SubResource("AnimationLibrary_rf788")
+autoplay = &"floating"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=384109141]
+modulate = Color(0.2, 1, 1, 1)
+position = Vector2(1347, 525)
+amount = 15
+gravity = Vector2(0, -980)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=746719132]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 783.0
+offset_right = 195.0
+offset_bottom = 934.0
+scale = Vector2(1.3758652, 1.3758652)
+theme_override_constants/separation = 8
+
+[node name="BtnStart" type="Button" parent="VBoxContainer" unique_id=717719374 node_paths=PackedStringArray("transition_overlay")]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.41568628, 1, 0.6392157, 1)
+theme_override_colors/font_hover_color = Color(0.31764707, 0.9490196, 0.09803922, 1)
+theme_override_fonts/font = ExtResource("1_pmwsi")
+theme_override_font_sizes/font_size = 40
+text = "PLAY"
+script = ExtResource("3_gxb8f")
+main_scene_path = "uid://braligc24g3qm"
+transition_overlay = NodePath("../../TransitionOverlay")
+
+[node name="BtnAbout" type="Button" parent="VBoxContainer" unique_id=666061698]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.41568628, 1, 0.6392157, 1)
+theme_override_colors/font_hover_color = Color(0.31764707, 0.9490196, 0.09803922, 1)
+theme_override_fonts/font = ExtResource("1_pmwsi")
+theme_override_font_sizes/font_size = 40
+text = "ABOUT"
+script = ExtResource("4_7lbdi")
+
+[node name="BtnExit" type="Button" parent="VBoxContainer" unique_id=143532174]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0, 0.47843137, 1)
+theme_override_colors/font_hover_color = Color(1, 0.53113896, 0.65515554, 1)
+theme_override_fonts/font = ExtResource("1_pmwsi")
+theme_override_font_sizes/font_size = 40
+text = "EXIT"
+script = ExtResource("4_joqfy")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1976962332]
+position = Vector2(1450, 312)
+scale = Vector2(0.5270071, 1.7341572)
+color = Color(1, 0, 0.47843137, 1)
+texture = SubResource("GradientTexture2D_ifisb")
+texture_scale = 6.48
+
+[node name="PointLight2D2" type="PointLight2D" parent="." unique_id=1960313705]
+position = Vector2(1291, 307)
+scale = Vector2(0.5270071, 1.7341572)
+color = Color(0, 0.8980392, 1, 1)
+energy = 1.09
+texture = SubResource("GradientTexture2D_ifisb")
+texture_scale = 6.48
+
+[node name="TransitionOverlay" type="ColorRect" parent="." unique_id=1281198266]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 647.1892
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.011764706, 0.011764706, 0.011764706, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1235284631]
+stream = ExtResource("4_rf788")
+volume_db = -11.422
+autoplay = true
+
+[node name="AboutPanel" type="TextureRect" parent="." unique_id=1119201663]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -677.6
+offset_top = -423.5
+offset_right = 677.6
+offset_bottom = 423.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_58rk5")
+
+[node name="MarginContainer" type="MarginContainer" parent="AboutPanel" unique_id=2087954187]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -582.0
+offset_top = -327.0
+offset_right = 584.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AboutPanel/MarginContainer" unique_id=71281180]
+layout_mode = 2
+
+[node name="HalamanKiri" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer" unique_id=995942801]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Dosen" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=464707260]
+layout_mode = 2
+text = "Dosen Pengampu"
+label_settings = ExtResource("7_du5gc")
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=1538548263]
+layout_mode = 2
+text = "Harits Ar Rosyid, S.T., M.T., Ph.D."
+label_settings = ExtResource("7_u8oox")
+
+[node name="NIP" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=442962548]
+layout_mode = 2
+text = "198108112009121003"
+label_settings = ExtResource("7_u8oox")
+
+[node name="FotoPakHarits" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKiri" unique_id=1741214040]
+custom_minimum_size = Vector2(400, 450)
+layout_mode = 2
+texture = ExtResource("8_sjbk0")
+expand_mode = 2
+
+[node name="HalamanKanan" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer" unique_id=1772882866]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="Label" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=451517868]
+layout_mode = 2
+text = "TIM PENGEMBANG"
+label_settings = ExtResource("7_du5gc")
+
+[node name="DevRows1" type="HBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=1302203301]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1" unique_id=1985738341]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("9_w43uf")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1" unique_id=592003402]
+layout_mode = 2
+alignment = 1
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1/VBoxContainer" unique_id=1287222033]
+layout_mode = 2
+text = "Adhyaksa Daudi Musthofa Akhyar"
+label_settings = ExtResource("7_u8oox")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NIM" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1/VBoxContainer" unique_id=1795741488]
+layout_mode = 2
+text = "240533603336"
+label_settings = ExtResource("7_u8oox")
+
+[node name="Job" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows1/VBoxContainer" unique_id=1150587304]
+layout_mode = 2
+text = "Project + Level"
+label_settings = ExtResource("7_u8oox")
+
+[node name="DevRows2" type="HBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=254837453]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2" unique_id=2141885322]
+custom_minimum_size = Vector2(50, 150)
+layout_mode = 2
+texture = ExtResource("10_du5gc")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2" unique_id=584068387]
+layout_mode = 2
+alignment = 1
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2/VBoxContainer" unique_id=2122264143]
+layout_mode = 2
+text = "abraham miko pratama"
+label_settings = ExtResource("7_u8oox")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NIM" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2/VBoxContainer" unique_id=853511891]
+layout_mode = 2
+text = "240533600750"
+label_settings = ExtResource("7_u8oox")
+
+[node name="Job" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows2/VBoxContainer" unique_id=795985321]
+layout_mode = 2
+text = "Programmer"
+label_settings = ExtResource("7_u8oox")
+
+[node name="DevRows3" type="HBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan" unique_id=114260830]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3" unique_id=521968280]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("11_7lbdi")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3" unique_id=1318887563]
+layout_mode = 2
+alignment = 1
+
+[node name="Nama" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3/VBoxContainer" unique_id=1267552279]
+layout_mode = 2
+text = "farel farizi purnomosasi"
+label_settings = ExtResource("7_u8oox")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NIM" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3/VBoxContainer" unique_id=208337197]
+layout_mode = 2
+text = "240533605901"
+label_settings = ExtResource("7_u8oox")
+
+[node name="Job" type="Label" parent="AboutPanel/MarginContainer/HBoxContainer/HalamanKanan/DevRows3/VBoxContainer" unique_id=550676416]
+layout_mode = 2
+text = "Artist"
+label_settings = ExtResource("7_u8oox")
+
+[node name="ButtonCloseAbout" type="Button" parent="AboutPanel" unique_id=1615007125]
+layout_mode = 0
+offset_left = 1259.6
+offset_top = 63.5
+offset_right = 1277.6
+offset_bottom = 94.5
+theme_override_colors/font_color = Color(1, 0.25490198, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0.5764706, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "X"
+script = ExtResource("14_vry4h")

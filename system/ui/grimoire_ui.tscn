@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://c3x7m1w8e4qav"]
+
+[ext_resource type="Script" uid="uid://bwqnjkfouy37g" path="res://system/ui/grimoire_ui.gd" id="1_grim"]
+[ext_resource type="Texture2D" uid="uid://dfhfxh0avnqov" path="res://content/ui/code_terminal_ui_wood (1).png" id="2_wood"]
+[ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="3_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.352941, 0.215686, 0.12549, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.615686, 0.443137, 0.258824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_code"]
+
+[node name="GrimoireUI" type="Control" unique_id=708454910]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_grim")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=1445359475]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="WoodFrame" type="NinePatchRect" parent="." unique_id=581946296]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -340.0
+offset_right = 520.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wood")
+patch_margin_left = 40
+patch_margin_top = 45
+patch_margin_right = 40
+patch_margin_bottom = 45
+
+[node name="QuestTitleLabel" type="Label" parent="WoodFrame" unique_id=2018283828]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_top = 32.0
+offset_right = 400.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.317647, 0.188235, 0.109804, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="WoodFrame" unique_id=270489374]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -75.0
+offset_top = 28.0
+offset_right = -35.0
+offset_bottom = 68.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "X"
+
+[node name="CodeContainer" type="Control" parent="WoodFrame" unique_id=1483766553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 85.0
+offset_right = -80.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GhostCodeEdit" type="CodeEdit" parent="WoodFrame/CodeContainer" unique_id=2079614226]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.45098, 0.34902, 0.25098, 0.419608)
+theme_override_colors/font_readonly_color = Color(0.45098, 0.34902, 0.25098, 0.419608)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxEmpty_code")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_code")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_code")
+editable = false
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="PlayerCodeEdit" type="CodeEdit" parent="WoodFrame/CodeContainer" unique_id=719112190]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/caret_color = Color(0.180392, 0.109804, 0.0588235, 1)
+theme_override_colors/font_color = Color(0.180392, 0.109804, 0.0588235, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxEmpty_code")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_code")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_code")
+
+[node name="StatusLabel" type="Label" parent="WoodFrame" unique_id=682941285]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -120.0
+offset_right = -280.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.180392, 0.109804, 0.0588235, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 22
+text = "Salin mantra di atas lalu tekan Racik."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BrewButton" type="Button" parent="WoodFrame" unique_id=1889628564]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -115.0
+offset_right = -80.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "RACIK"

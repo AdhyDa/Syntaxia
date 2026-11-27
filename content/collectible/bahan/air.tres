@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ResourceCollectible" format=3]
+
+[ext_resource type="Script" uid="uid://dvvolxuw7jeb7" path="res://system/collectible/resource_collectible.gd" id="1_rescol"]
+[ext_resource type="Texture2D" uid="uid://djufd0a5ojoe2" path="res://content/collectible/bahan/air.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_rescol")
+item_id = "air"
+display_name = "Air"
+icon = ExtResource("2_tex")
