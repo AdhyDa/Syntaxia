@@ -1,7 +1,9 @@
 extends Control
 
-# 1. Tambahkan referensi tombol pembuka menu di HUD
-@onready var btn_menu_toggle: Button = $BtnMenuToggle # Sesuaikan nama node tombol MENU kamu
+# 1. Tambahkan referensi tombol pembuka menu & tutorial di HUD
+@onready var btn_menu_toggle: Button = $BtnMenuToggle
+@onready var btn_tutorial: BaseButton = $"../BtnTutorial"
+@onready var tutorial_ui: Control = $"../TutorialUI"
 
 # Referensi overlay dan tombol internal pause
 @onready var pause_overlay: ColorRect = $PauseOverlay # Atau NinePatchRect jika menggunakan tekstur
@@ -12,8 +14,10 @@ extends Control
 func _ready() -> void:
 	pause_overlay.hide()
 	
-	# Connect tombol MENU yang ada di HUD
+	# Connect tombol MENU & TUTORIAL yang ada di HUD
 	btn_menu_toggle.pressed.connect(_on_btn_menu_toggle_pressed)
+	if btn_tutorial:
+		btn_tutorial.pressed.connect(_on_btn_tutorial_pressed)
 	
 	# Connect tombol-tombol di dalam pop-up pause
 	btn_resume.pressed.connect(_on_btn_resume_pressed)
@@ -22,6 +26,8 @@ func _ready() -> void:
 
 # Membuka/menutup pause via tombol keyboard ESC
 func _unhandled_input(event: InputEvent) -> void:
+	if tutorial_ui and tutorial_ui.visible:
+		return
 	if event.is_action_pressed("ui_cancel"):
 		if get_tree().paused:
 			_resume_game()
@@ -41,6 +47,10 @@ func _resume_game() -> void:
 # Dipanggil saat tombol MENU di HUD diklik
 func _on_btn_menu_toggle_pressed() -> void:
 	_pause_game()
+
+func _on_btn_tutorial_pressed() -> void:
+	if tutorial_ui and tutorial_ui.has_method("open_tutorial"):
+		tutorial_ui.open_tutorial()
 
 func _on_btn_resume_pressed() -> void:
 	_resume_game()
