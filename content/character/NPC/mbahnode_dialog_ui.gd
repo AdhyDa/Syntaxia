@@ -21,9 +21,9 @@ func refresh_dialog() -> void:
 	# Cek apakah Quest 2 sudah diselesaikan terlebih dahulu
 	var q2_status = QuestManager.get_quest_status(2) if is_instance_valid(QuestManager) else QuestManager.QuestStatus.NOT_STARTED
 	if q2_status != QuestManager.QuestStatus.COMPLETED:
-		speaker_name_label.text = "SPIRIT LELUHUR PERACIK"
-		dialog_text_label.text = "Wahai pengelana muda... Jiwamu belum selaras dengan energi kuno tanah Syntaxia ini.\n\nKudengar Narji di desa masih kelelahan dan membutuhkan bantuanmu. Selesaikanlah tugasmu membantunya terlebih dahulu sebelum kamu siap menerima rahasia peracikan leluhur!"
-		btn_option_1.text = "Baiklah, aku akan bantu Narji dulu"
+		speaker_name_label.text = "MBAH NODE (Penjaga Resep Kuno)"
+		dialog_text_label.text = "Wahai pengelana muda... Jiwamu belum selaras dengan energi kuno tanah Syntaxia ini.\n\nKudengar Bara di desa masih kelelahan dan membutuhkan bantuanmu. Selesaikanlah tugasmu membantunya terlebih dahulu sebelum kamu siap menerima rahasia peracikan leluhur!"
+		btn_option_1.text = "Baiklah, aku akan bantu Bara dulu"
 		btn_option_2.visible = false
 		return
 
@@ -35,7 +35,7 @@ func refresh_dialog() -> void:
 			q_status = QuestManager.QuestStatus.READY_TO_DELIVER
 			QuestManager.set_quest_status(3, q_status)
 			
-	speaker_name_label.text = "SPIRIT LELUHUR PERACIK"
+	speaker_name_label.text = "MBAH NODE (Penjaga Resep Kuno)"
 	btn_option_2.visible = false
 	
 	match q_status:
@@ -62,7 +62,7 @@ func refresh_dialog() -> void:
 			
 		QuestManager.QuestStatus.COMPLETED:
 			dialog_text_label.text = "Aura tolak bala desa kini bersinar terang berkatmu. Pemahamanmu tentang abstraksi mantra dan dekomposisi fungsi telah terbukti melampaui peracik biasa. Semoga berkah leluhur selalu menuntun langkahmu!"
-			btn_option_1.text = "Terima kasih, Spirit Leluhur!"
+			btn_option_1.text = "Terima kasih, Mbah Node!"
 			btn_option_2.visible = false
 
 
@@ -97,7 +97,7 @@ func _on_btn_option_1_pressed() -> void:
 				QuestManager.complete_quest(3)
 				
 			dialog_text_label.text = "Ritual berhasil! Selubung sakral telah terpasang membentengi seluruh desa Syntaxia!\n\nSebagai tanda penghormatan kami, terimalah 50 Koin Emas dan 200 EXP dari pusaka leluhur ini!"
-			btn_option_1.text = "Terima kasih, Spirit Leluhur!"
+			btn_option_1.text = "Terima kasih, Mbah Node!"
 			btn_option_2.visible = false
 			# Ubah koneksi tombol agar saat ditekan langsung tutup
 			btn_option_1.pressed.disconnect(_on_btn_option_1_pressed)

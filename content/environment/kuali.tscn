@@ -4,6 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://c6chl0altikll" path="res://content/environment/cauldron_spritesheet.png" id="1_wl4jt"]
 [ext_resource type="FontFile" uid="uid://bho5xpqfjiwe5" path="res://content/menu/aset_menu/ThaleahFat.ttf" id="3_font"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kuali"]
+radius = 38.470768
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xrivr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 26.019224
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_prv7k"]
 atlas = ExtResource("1_wl4jt")
 region = Rect2(0, 0, 64, 64)
@@ -73,21 +81,25 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kuali"]
-radius = 64.0
-
 [node name="Kuali" type="Area2D" unique_id=718830078]
-collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294810291]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_kuali")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1239199310]
+physics_material_override = SubResource("PhysicsMaterial_xrivr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1897268968]
+position = Vector2(0, 15)
+shape = SubResource("CircleShape2D_xrivr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706974935]
 sprite_frames = SubResource("SpriteFrames_ifisb")
 animation = &"kuali_idle"
 frame_progress = 0.6334563
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=294810291]
-shape = SubResource("CircleShape2D_kuali")
 
 [node name="PromptLabel" type="Label" parent="." unique_id=892318491]
 z_index = 10

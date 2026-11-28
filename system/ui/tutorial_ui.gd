@@ -21,7 +21,7 @@ const SLIDES: Array[Dictionary] = [
 	},
 	{
 		"title": "2. Mengambil Quest",
-		"description": "Dekati warga desa seperti Nara, Narji, atau Spirit Leluhur, lalu tekan [E] untuk berbicara, menerima misi, dan melihat daftar ramuan yang dibutuhkan.",
+		"description": "Dekati warga desa seperti Nara, Bara, atau Mbah Node, lalu tekan [E] untuk berbicara, menerima misi, dan melihat daftar ramuan yang dibutuhkan.",
 		"image": null,
 		"placeholder_colors": [Color(0.22, 0.48, 0.36), Color(0.12, 0.28, 0.20)]
 	},

@@ -21,7 +21,7 @@ func refresh_dialog() -> void:
 	# Cek apakah Quest 1 sudah diselesaikan terlebih dahulu
 	var q1_status = QuestManager.get_quest_status(1) if is_instance_valid(QuestManager) else QuestManager.QuestStatus.NOT_STARTED
 	if q1_status != QuestManager.QuestStatus.COMPLETED:
-		speaker_name_label.text = "NARJI (Calon Ksatria Syntaxia)"
+		speaker_name_label.text = "BARA (Calon Ksatria Syntaxia)"
 		dialog_text_label.text = "Di desa ini, semuanya bersenang-senang selain aku, HUSS HUSS HUSS.\n\nHei tuan, namamu siapa? Jangan lupa pakai busana, kudengar Nara si penyihir pemula di dekat sana sedang menggigil hebat karena sihir es. Tolong bantu buatkan dia ramuan hangat dulu sebelum bicara denganku ya!"
 		btn_option_1.text = "Baiklah, aku akan temui Nara dulu"
 		btn_option_2.visible = false
@@ -35,7 +35,7 @@ func refresh_dialog() -> void:
 			q_status = QuestManager.QuestStatus.READY_TO_DELIVER
 			QuestManager.set_quest_status(2, q_status)
 			
-	speaker_name_label.text = "NARJI (Calon Ksatria Syntaxia)"
+	speaker_name_label.text = "BARA (Calon Ksatria Syntaxia)"
 	btn_option_2.visible = false
 	
 	match q_status:
@@ -62,7 +62,7 @@ func refresh_dialog() -> void:
 			
 		QuestManager.QuestStatus.COMPLETED:
 			dialog_text_label.text = "Terima kasih banyak! Berkat Beras Kencur buatanmu, staminaku langsung pulih penuh. Sekarang aku tidak perlu lepas busana dan siap lanjut latihan tempur!"
-			btn_option_1.text = "Tetap semangat, Narji!"
+			btn_option_1.text = "Tetap semangat, Bara!"
 			btn_option_2.visible = false
 
 
@@ -97,7 +97,7 @@ func _on_btn_option_1_pressed() -> void:
 				QuestManager.complete_quest(2)
 				
 			dialog_text_label.text = "Teguk... Teguk... Segar sekali! Rasa lelah di sekujur tubuhku langsung hilang seketika!\n\nIni 20 Koin dan 120 EXP untukmu sebagai tanda terima kasihku!"
-			btn_option_1.text = "Sama-sama, Narji!"
+			btn_option_1.text = "Sama-sama, Bara!"
 			btn_option_2.visible = false
 			# Ubah koneksi tombol agar saat ditekan langsung tutup
 			btn_option_1.pressed.disconnect(_on_btn_option_1_pressed)

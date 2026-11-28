@@ -20,14 +20,14 @@
 [ext_resource type="PackedScene" uid="uid://cha004qvoi5d3" path="res://content/character/NPC/NPC2.tscn" id="14_wmw64"]
 [ext_resource type="AudioStream" uid="uid://c7vlu3uu47bb5" path="res://audio/music/theme_dream.ogg" id="15_4dufa"]
 [ext_resource type="Texture2D" uid="uid://bdvl5xcum1mtt" path="res://content/environment/swamp/gradient.tres" id="15_148tu"]
-[ext_resource type="Script" uid="uid://k8n46k0gbynv" path="res://content/character/NPC/narji_interaction.gd" id="15_483ib"]
+[ext_resource type="Script" uid="uid://k8n46k0gbynv" path="res://content/character/NPC/bara_interaction.gd" id="15_483ib"]
 [ext_resource type="AudioStream" uid="uid://bh0aq1er5v5o1" path="res://audio/music/theme_swamp.ogg" id="16_e35uw"]
 [ext_resource type="Script" uid="uid://cnuxju0tl6cry" path="res://system/teleporter/teleporter.gd" id="18_rh3ex"]
 [ext_resource type="PackedScene" path="res://system/spawner/grass_spawner.tscn" id="19_spawner"]
 [ext_resource type="Script" uid="uid://cvyy0iypq6esc" path="res://content/character/NPC/nara_interaction.gd" id="20_nara"]
 [ext_resource type="Script" uid="uid://felgvips8h" path="res://content/environment/toko_interaction.gd" id="21_toko"]
 [ext_resource type="PackedScene" uid="uid://cknxtiahgawtb" path="res://content/character/NPC/NPC3.tscn" id="22_npc3"]
-[ext_resource type="Script" uid="uid://dh1prsj2w4jbn" path="res://content/character/NPC/spirit_interaction.gd" id="23_spirit"]
+[ext_resource type="Script" uid="uid://dh1prsj2w4jbn" path="res://content/character/NPC/mbahnode_interaction.gd" id="23_spirit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uupxc"]
 size = Vector2(160.93558, 153.45029)
@@ -193,7 +193,7 @@ script = ExtResource("9_pof52")
 target = NodePath("../../player")
 
 [node name="Path2D" type="Path2D" parent="Tilemap" index="9" unique_id=1993364946]
-position = Vector2(-59, -130)
+position = Vector2(-59, -115)
 curve = SubResource("Curve2D_6dhpb")
 
 [node name="NPC" parent="Tilemap" index="10" unique_id=228598014 instance=ExtResource("10_kdwhh")]

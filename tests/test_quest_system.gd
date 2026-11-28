@@ -37,7 +37,7 @@ func test_quest_database_integrity() -> void:
 	var q3 = qm.get_quest_data(3)
 	assert_false(q3.is_empty(), "Quest 3 harus ada di database")
 	assert_eq(q3.get("short_name"), "Gepyokan", "Short name Quest 3 harus Gepyokan")
-	assert_eq(q3.get("client_short"), "Spirit Leluhur", "Client short Quest 3 harus Spirit Leluhur")
+	assert_eq(q3.get("client_short"), "Mbah Node", "Client short Quest 3 harus Mbah Node")
 	assert_eq(q3.get("reward_gold"), 50, "Reward gold Quest 3 harus 50")
 	assert_eq(q3.get("reward_exp"), 200, "Reward exp Quest 3 harus 200")
 
@@ -64,17 +64,17 @@ func test_quest_npc_hints_and_guides() -> void:
 	assert_eq(guide1["title"], "Petunjuk", "Title guide awal harus Petunjuk")
 	assert_true("Nara" in guide1["hint"], "Petunjuk awal harus mengarahkan ke Nara")
 	
-	# Setelah Quest 1 selesai, harus arahkan ke Narji (Quest 2)
+	# Setelah Quest 1 selesai, harus arahkan ke Bara (Quest 2)
 	qm.set_quest_status(1, QuestManager.QuestStatus.COMPLETED)
 	assert_eq(qm.get_next_available_quest_id(), 2, "Setelah Quest 1 beres, harus Quest 2")
 	var guide2 = qm.get_current_guide()
-	assert_true("Narji" in guide2["hint"], "Petunjuk setelah Q1 harus mengarahkan ke Narji")
+	assert_true("Bara" in guide2["hint"], "Petunjuk setelah Q1 harus mengarahkan ke Bara")
 	
-	# Setelah Quest 2 selesai, harus arahkan ke Spirit Leluhur (Quest 3)
+	# Setelah Quest 2 selesai, harus arahkan ke Mbah Node (Quest 3)
 	qm.set_quest_status(2, QuestManager.QuestStatus.COMPLETED)
 	assert_eq(qm.get_next_available_quest_id(), 3, "Setelah Quest 2 beres, harus Quest 3")
 	var guide3 = qm.get_current_guide()
-	assert_true("Spirit" in guide3["hint"], "Petunjuk setelah Q2 harus mengarahkan ke Spirit Leluhur")
+	assert_true("Mbah Node" in guide3["hint"], "Petunjuk setelah Q2 harus mengarahkan ke Mbah Node")
 	
 	# Setelah Quest 3 selesai, semua beres
 	qm.set_quest_status(3, QuestManager.QuestStatus.COMPLETED)

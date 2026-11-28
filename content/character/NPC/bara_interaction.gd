@@ -3,7 +3,7 @@ extends Node2D
 ## NarjiInteraction
 ## Mengelola interaksi berbicara dengan NPC Narji
 
-const NARJI_DIALOG_SCENE = preload("res://content/character/NPC/narji_dialog_ui.tscn")
+const NARJI_DIALOG_SCENE = preload("res://content/character/NPC/bara_dialog_ui.tscn")
 const UI_FONT = preload("res://content/menu/aset_menu/ThaleahFat.ttf")
 
 @onready var parent_npc: CharacterBody2D = get_parent() as CharacterBody2D
@@ -47,7 +47,7 @@ func _ready() -> void:
 	
 	# Buat Prompt Label melayang
 	prompt_label = Label.new()
-	prompt_label.text = "[E] Narji"
+	prompt_label.text = "[E] Bara"
 	prompt_label.add_theme_font_override("font", UI_FONT)
 	prompt_label.add_theme_font_size_override("font_size", 14)
 	prompt_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
@@ -65,7 +65,7 @@ func _ready() -> void:
 func _is_player(body: Node2D) -> bool:
 	# Eksklusi NPC, companion, dan diri sendiri agar tidak memicu deteksi palsu
 	var lower_name: String = body.name.to_lower()
-	if lower_name.contains("npc") or lower_name.contains("narji") \
+	if lower_name.contains("npc") or lower_name.contains("narji") or lower_name.contains("bara") \
 	or lower_name.contains("book") or lower_name.contains("robot"):
 		return false
 	return body.is_in_group("player") \
